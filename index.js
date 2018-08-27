@@ -15,7 +15,10 @@ const client = new Client(config);
 app.post('/webhook', middleware(config), (req, res) => {
     Promise
         .all(req.body.events.map(handleEvent))
-        .then(result => res.json(result))
+        .then(result => {
+            res.json(result);
+            console.log(result);
+        })
         .catch(err => {
             console.log(err);
             res.status(500).end();
