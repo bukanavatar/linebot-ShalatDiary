@@ -12,9 +12,7 @@ const config = {
 };
 const client = new Client(config);
 
-app.use(middleware(config));
-
-app.post('/webhook', (req, res) => {
+app.post('/webhook', middleware(config), (req, res) => {
     Promise
         .all(req.body.events.map(handleEvent))
         .then(result => res.json(result))
@@ -23,7 +21,9 @@ app.post('/webhook', (req, res) => {
             res.status(500).end();
         });
 });
-
+app.get('/test', (req, res) => {
+    res.send("working");
+});
 function handleEvent(event) {
     if (event.type !== "message" || event.message.type !== "text") {
         return Promise.resolve(null)
@@ -35,16 +35,16 @@ function handleEvent(event) {
     return client.replyMessage(event.replyToken, echo);
 }
 
-app.use((err, req, res, next) => {
-    if (err instanceof SignatureValidationFailed) {
-        res.status(401).send(err.signature);
-        return
-    } else if (err instanceof JSONParseError) {
-        res.status(400).send(err.raw);
-        return
-    }
-    next(err)
-});
+// app.use((err, req, res, next) => {
+//     if (err instanceof SignatureValidationFailed) {
+//         res.status(401).send(err.signature);
+//         return
+//     } else if (err instanceof JSONParseError) {
+//         res.status(400).send(err.raw);
+//         return
+//     }
+//     next(err)
+// });
 
 app.listen(8080, () => {
     console.log('Listening on Port 8080');
