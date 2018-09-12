@@ -39,14 +39,23 @@ app.get('/test', (req, res) => {
     res.send("working");
 });
 function handleEvent(event) {
-    if (event.type !== "message" || event.message.type !== "text") {
-        return Promise.resolve(null)
+    switch (event.type) {
+        case 'follow':
+            return handleFollow(event.replyToken);
+        case 'message':
+            const message = event.message;
+            switch (message.type) {
+                case 'text':
+                    return handleText(message, event.replyToken, event.source);
+            }
     }
-    const echo = {
+}
+
+function handleFollow(replyToken) {
+    client.replyMessage(replyToken, {
         type: 'text',
-        text: event.message.text
-    };
-    return client.replyMessage(event.replyToken, echo);
+        text: 'Thanks For Following This Account'
+    }).catch(err => console.log(err));
 }
 
 https.createServer(options, app).listen(1234);
