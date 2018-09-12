@@ -11,9 +11,13 @@ const options = {
     key: fs.readFileSync("/etc/letsencrypt/live/bukanavatar.com/privkey.pem"),
     cert: fs.readFileSync("/etc/letsencrypt/live/bukanavatar.com/fullchain.pem")
 };
+
+const CHANNEL_ACCESS_TOKEN = process.env.CHANNEL_ACCESS_TOKEN;
+const CHANNEL_SECRET = process.env.CHANNEL_SECRET;
+
 const config = {
-    channelAccessToken: 'D9JnIsMjrRUysTqDg7KCrWZjlNZoJxl3SfoW8C1B3ICB5pVnsLzqos8UogA12/ZFaKQMrYdjhybkzu6DI6/kct/R4JMGA6ffxanqgilP67y7RjmsARwQ9EGoRpseCO0H06G4cRwU0MD5Q73Xa6vwhQdB04t89/1O/w1cDnyilFU=',
-    channelSecret: '26ace68ef19ead93d2e88e83cba4a1a6'
+    channelAccessToken: CHANNEL_ACCESS_TOKEN,
+    channelSecret: CHANNEL_SECRET,
 };
 const client = new Client(config);
 
