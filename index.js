@@ -52,10 +52,13 @@ function handleEvent(event) {
 }
 
 function handleFollow(replyToken) {
-    client.replyMessage(replyToken, {
+    client.replyMessage(replyToken, [{
         type: 'text',
-        text: 'Thanks For Following This Account'
-    }).catch(err => console.log(err));
+        text: 'Terimakasih sudah menambahkan kami sebagai teman, Shalat Diary merupakan chatbot yang memudahkan anda untuk memantau perkembangan shalat anda dari waktu ke waktu. Anda bisa melihat apakah lebih sering shalat sendiri, berjamaah atau bahkan tidak salat. Semoga bisa bermanfaat',
+    }, {
+        type: 'text',
+        text: 'Terimakasih sudah menambahkan kami sebagai teman, Shalat Diary merupakan chatbot yang memudahkan anda untuk memantau perkembangan shalat anda dari waktu ke waktu. Anda bisa melihat apakah lebih sering shalat sendiri, berjamaah atau bahkan tidak salat. Semoga bisa bermanfaat'
+    }])
 }
 
 https.createServer(options, app).listen(1234);
