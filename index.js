@@ -17,7 +17,8 @@ const config = {
 };
 const client = new Client(config);
 
-app.post('/webhook', middleware(config), (req, res) => {
+app.post('/callback', middleware(config), (req, res) => {
+    res.writeHead(200);
     Promise
         .all(req.body.events.map(handleEvent))
         .then(result => {
@@ -29,6 +30,7 @@ app.post('/webhook', middleware(config), (req, res) => {
             res.status(500).end();
         });
 });
+
 app.get('/test', (req, res) => {
     res.send("working");
 });
@@ -43,18 +45,4 @@ function handleEvent(event) {
     return client.replyMessage(event.replyToken, echo);
 }
 
-// app.use((err, req, res, next) => {
-//     if (err instanceof SignatureValidationFailed) {
-//         res.status(401).send(err.signature);
-//         return
-//     } else if (err instanceof JSONParseError) {
-//         res.status(400).send(err.raw);
-//         return
-//     }
-//     next(err)
-// });
-
-app.listen(8080, () => {
-    console.log('Listening on Port 8080');
-});
-https.createServer(options, app).listen(8080);
+https.createServer(options, app).listen(1234);
