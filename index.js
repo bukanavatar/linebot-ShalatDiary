@@ -1,11 +1,11 @@
 //Regular Events
-const https = require('https'), fs = require('fs');
-const express = require('express');
-const middleware = require('@line/bot-sdk').middleware;
-const Client = require('@line/bot-sdk').Client;
+import https from 'https';
+import fs from 'fs';
+import express from 'express';
+import {Client, middleware} from '@line/bot-sdk';
 //Events
-const FollowEvent = require('./Events/events_follow');
-const MessageEvent = require('./Events/events_message');
+import FollowEvent from './Events/events_follow';
+import {handleText} from './Events/events_message';
 
 const app = express();
 
@@ -40,7 +40,7 @@ function handleEvent(event) {
             const message = event.message;
             switch (message.type) {
                 case 'text':
-                    return MessageEvent.handleText(message, event.replyToken, event.source, client);
+                    return handleText(message, event.replyToken, event.source, client);
             }
     }
 }
