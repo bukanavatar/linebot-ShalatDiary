@@ -1,16 +1,13 @@
+//Regular Events
 const https = require('https'), fs = require('fs');
-
 const express = require('express');
 const middleware = require('@line/bot-sdk').middleware;
-const JSONParseError = require('@line/bot-sdk').JSONParseError;
-const SignatureValidationFailed = require('@line/bot-sdk').SignatureValidationFailed;
 const Client = require('@line/bot-sdk').Client;
+//Events
+const FollowEvent = require('./Events/events_follow');
+const MessageEvent = require('./Events/events_message');
 
 const app = express();
-const options = {
-    key: fs.readFileSync("/etc/letsencrypt/live/bukanavatar.com/privkey.pem"),
-    cert: fs.readFileSync("/etc/letsencrypt/live/bukanavatar.com/fullchain.pem")
-};
 
 const CHANNEL_ACCESS_TOKEN = process.env.CHANNEL_ACCESS_TOKEN;
 const CHANNEL_SECRET = process.env.CHANNEL_SECRET;
@@ -35,43 +32,22 @@ app.post('/callback', middleware(config), (req, res) => {
         });
 });
 
-app.get('/test', (req, res) => {
-    res.send("working");
-});
 function handleEvent(event) {
     switch (event.type) {
         case 'follow':
-            return handleFollow(event.replyToken);
+            return FollowEvent(event.replyToken, event.source, client);
         case 'message':
             const message = event.message;
             switch (message.type) {
                 case 'text':
-                    return handleText(message, event.replyToken, event.source);
+                    return MessageEvent.handleText(message, event.replyToken, event.source, client);
             }
     }
 }
 
-//Handling text Message
-function handleText(message, replyToken, source) {
-    switch (message.text.toLowerCase()) {
-        case 'test':
-            client.replyMessage(replyToken, [{
-                type: 'text',
-                text: 'Tes ini adalah tes emot \udbc0\udc30'
-            }]);
-    }
-}
-
-//Handling Follow Event
-function handleFollow(replyToken) {
-    client.replyMessage(replyToken, [{
-        type: 'text',
-        text: 'Terimakasih sudah menambahkan kami sebagai teman \udbc0\udc30, Shalat Diary merupakan chatbot yang memudahkan anda untuk memantau perkembangan shalat anda dari waktu ke waktu. Anda bisa melihat apakah lebih sering shalat sendiri, berjamaah atau bahkan tidak salat. Semoga bisa bermanfaat',
-    }, {
-        type: "sticker",
-        packageId: "1",
-        stickerId: "144"
-    }])
-}
+const options = {
+    key: fs.readFileSync("/etc/letsencrypt/live/bukanavatar.com/privkey.pem"),
+    cert: fs.readFileSync("/etc/letsencrypt/live/bukanavatar.com/fullchain.pem")
+};
 
 https.createServer(options, app).listen(1234);
