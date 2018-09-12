@@ -1,3 +1,5 @@
+const https = require('https'), fs = require('fs');
+
 const express = require('express');
 const middleware = require('@line/bot-sdk').middleware;
 const JSONParseError = require('@line/bot-sdk').JSONParseError;
@@ -5,7 +7,10 @@ const SignatureValidationFailed = require('@line/bot-sdk').SignatureValidationFa
 const Client = require('@line/bot-sdk').Client;
 
 const app = express();
-
+const options = {
+    key: fs.readFileSync("/etc/letsencrypt/live/bukanavatar.com/privkey.pem"),
+    cert: fs.readFileSync("/etc/letsencrypt/live/bukanavatar.com/fullchain.pem")
+};
 const config = {
     channelAccessToken: 'D9JnIsMjrRUysTqDg7KCrWZjlNZoJxl3SfoW8C1B3ICB5pVnsLzqos8UogA12/ZFaKQMrYdjhybkzu6DI6/kct/R4JMGA6ffxanqgilP67y7RjmsARwQ9EGoRpseCO0H06G4cRwU0MD5Q73Xa6vwhQdB04t89/1O/w1cDnyilFU=',
     channelSecret: '26ace68ef19ead93d2e88e83cba4a1a6'
@@ -52,3 +57,4 @@ function handleEvent(event) {
 app.listen(8080, () => {
     console.log('Listening on Port 8080');
 });
+https.createServer(options, app).listen(8080);
