@@ -51,13 +51,26 @@ function handleEvent(event) {
     }
 }
 
+//Handling text Message
+function handleText(message, replyToken, source) {
+    switch (message.text.toLowerCase()) {
+        case 'test':
+            client.replyMessage(replyToken, [{
+                type: 'text',
+                text: 'Tes ini adalah tes emot \udbc0\udc30'
+            }]);
+    }
+}
+
+//Handling Follow Event
 function handleFollow(replyToken) {
     client.replyMessage(replyToken, [{
         type: 'text',
-        text: 'Terimakasih sudah menambahkan kami sebagai teman, Shalat Diary merupakan chatbot yang memudahkan anda untuk memantau perkembangan shalat anda dari waktu ke waktu. Anda bisa melihat apakah lebih sering shalat sendiri, berjamaah atau bahkan tidak salat. Semoga bisa bermanfaat',
+        text: 'Terimakasih sudah menambahkan kami sebagai teman \udbc0\udc30, Shalat Diary merupakan chatbot yang memudahkan anda untuk memantau perkembangan shalat anda dari waktu ke waktu. Anda bisa melihat apakah lebih sering shalat sendiri, berjamaah atau bahkan tidak salat. Semoga bisa bermanfaat',
     }, {
-        type: 'text',
-        text: 'Terimakasih sudah menambahkan kami sebagai teman, Shalat Diary merupakan chatbot yang memudahkan anda untuk memantau perkembangan shalat anda dari waktu ke waktu. Anda bisa melihat apakah lebih sering shalat sendiri, berjamaah atau bahkan tidak salat. Semoga bisa bermanfaat'
+        type: "sticker",
+        packageId: "1",
+        stickerId: "144"
     }])
 }
 
