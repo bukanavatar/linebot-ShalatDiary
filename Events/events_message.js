@@ -1,5 +1,5 @@
-export function handleText(message, replyToken, source, client) {
 
+export function handleText(message, replyToken, source, client) {
     switch (message.text.toLowerCase()) {
         case 'test':
             client.replyMessage(replyToken, [{

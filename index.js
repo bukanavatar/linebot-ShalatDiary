@@ -3,6 +3,7 @@ import https from 'https';
 import fs from 'fs';
 import express from 'express';
 import {Client, middleware} from '@line/bot-sdk';
+import firebase from 'firebase';
 //Events
 import {follow} from './Events/events_follow';
 import {handleText} from './Events/events_message';
@@ -17,6 +18,11 @@ const config = {
 };
 const client = new Client(config);
 
+const configFirebase = {
+    apiKey: "AIzaSyCAveXkK3a66orD-6ouTnj7S_FPIS6yQ-I"
+};
+
+firebase.initializeApp(configFirebase);
 
 app.post('/callback', middleware(config), (req, res) => {
     res.writeHead(200);
