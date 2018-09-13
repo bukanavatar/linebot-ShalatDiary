@@ -21,16 +21,13 @@ export function handleLocation(message, replyToken, source, client, db) {
                 .then(doc => {
                     const data = doc.data();
                     if (data.fLocationAwal === 1) {
-                        return client.replyMessage(replyToken, {
-                            type: text,
-                            text: {
-                                title: message.title,
-                                address: message.address,
-                                latitude: message.latitude,
-                                longitude: message.longitude,
-                            }
-                        });
                         const refDb = db.collection('users').doc(profile.userId);
+                        const setAwal = db.collection('users').doc(profile.userId).collection('lokasi').doc('lokasiAwal').set({
+                            title: message.title,
+                            address: message.address,
+                            latitude: message.latitude,
+                            longitude: message.longitude,
+                        });
                         // const setDbAwal = refDb.collection('lokasi').doc('lokasiAwal')
                         //     .set({
                         //         title: message.title,
