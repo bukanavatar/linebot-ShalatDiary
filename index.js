@@ -6,7 +6,7 @@ import {Client, middleware} from '@line/bot-sdk';
 import firebase from 'firebase';
 //Events
 import {follow} from './Events/events_follow';
-import {handleText} from './Events/events_message';
+import {handleLocation, handleText} from './Events/events_message';
 import admin from "firebase-admin";
 import serviceAccount from "./shalat-diary-b25ad401ff6c";
 
@@ -56,6 +56,8 @@ function handleEvent(event) {
             switch (message.type) {
                 case 'text':
                     return handleText(message, event.replyToken, event.source, client);
+                case 'location':
+                    return handleLocation(message, event.replyToken, event.source, client);
             }
     }
 }

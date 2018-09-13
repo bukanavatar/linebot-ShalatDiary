@@ -11,7 +11,8 @@ export function follow(replyToken, source, client, db) {
                             const dbRef = db.collection('users').doc(profile.userId);
                             const setUser = dbRef.set({
                                 'uid': profile.userId,
-                                'displayName': profile.displayName
+                                'displayName': profile.displayName,
+                                'fLocationAwal': 1
                             });
                             callReplyMessage(profile);
                         } else {
