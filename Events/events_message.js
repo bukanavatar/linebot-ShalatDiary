@@ -1,20 +1,16 @@
 import axios from 'axios';
 
-export function handleText(message, replyToken, source, client, db) {
+export function handleText(message, replyToken, source, timestamp, client, db) {
     const idUser = source.userId;
     return client.getProfile(idUser)
         .then(profile => {
             const profileId = profile.userId;
             switch (message.text.toLowerCase()) {
                 case 'test':
-                    const getDoc = db.collection('users').doc(profileId).get()
-                        .then(doc => {
-                            console.log(doc.data());
-                            client.replyMessage(replyToken, [{
-                                type: 'text',
-                                text: doc.data()
-                            }])
-                        }).catch(err => console.log("ada error", err));
+                    client.replyMessage(replyToken, {
+                        type: 'text',
+                        text: new Date(timestamp).toString()
+                    });
                     break;
                 case 'jadwal shalat':
                     const dbRefLoc = db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get()

@@ -58,7 +58,7 @@ function handleEvent(event) {
             const message = event.message;
             switch (message.type) {
                 case 'text':
-                    return handleText(message, event.replyToken, event.source, client, db);
+                    return handleText(message, event.replyToken, event.source, event.timestamp, client, db);
                 case 'location':
                     return handleLocation(message, event.replyToken, event.source, client, db);
             }
