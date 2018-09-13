@@ -27,11 +27,11 @@ export function handleLocation(message, replyToken, source, client, db) {
                                 title: message.title,
                                 address: message.address,
                                 latitude: message.latitude,
-                                longitude: message.longitude
-                            }).catch(err => console.log("Set DB Awal Error", err));
+                                longitude: message.longitude,
+                            });
                         const setFlag = refDb.set({
                             fLocationAwal: 0
-                        }, {merge: true}).catch(err => console.log("Set Flag Error", err));
+                        }, {merge: true});
                     }
                 }).catch(err => console.log("Get Doc Error", err));
         }).catch(err => console.log("Error get User dari Location", err));
