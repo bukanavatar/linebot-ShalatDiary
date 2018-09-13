@@ -57,7 +57,7 @@ function handleEvent(event) {
                 case 'text':
                     return handleText(message, event.replyToken, event.source, client, db);
                 case 'location':
-                    return handleLocation(message, event.replyToken, event.source, client);
+                    return handleLocation(message, event.replyToken, event.source, client, db);
             }
     }
 }
