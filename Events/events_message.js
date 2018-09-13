@@ -4,11 +4,16 @@ export function handleText(message, replyToken, source, client, db) {
             const getDoc = db.collection('users').doc('U5b8038d4acf2c3c808e89bd8fe75f281').get()
                 .then(doc => {
                     console.log(doc.data());
-                    client.replyMessage(replyToken, [{
-                        type: 'text',
-                        text: doc.data()
-                    }]);
+                    sendMessage(doc);
                 });
+    }
+
+    function sendMessage(doc) {
+        client.replyMessage(replyToken, [{
+            type: 'text',
+            text: doc.data()
+        }])
+            .catch(err => console.log("ada error", err));
     }
 }
 
