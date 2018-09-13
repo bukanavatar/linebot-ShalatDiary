@@ -1,9 +1,12 @@
 import admin from 'firebase-admin';
-import functions from 'firebase-functions';
+
+import serviceAccount from '../shalat-diary-b25ad401ff6c.json';
 
 export function follow(replyToken, source, client) {
     const idUser = source.userId;
-    admin.initializeApp(functions.config().firebase);
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
+    });
     const db = admin.firestore();
 
     let profile = {};

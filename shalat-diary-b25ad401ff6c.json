@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "shalat-diary",
+  "private_key_id": "b25ad401ff6c90507aeee512a719134e529e5059",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDVWjLd1gdVO+ch\n/72Q61QDoRmhs12Azzipztl1aBU32QwIRqUqvy8U3lMjpJs8JZfoN0V4YHKp57b/\ns5PrqGFXciFdU2VRDse9quJcZh/Ykx+bKV0kVA0MGkAO/gVuRi/d3ucgQnH/PCSU\nExxxYh9RTdNK9O3XYevlL4Bt9E3PZp9W2uWPCnTEMnSDgboGgGFHDC7wiOCST5Qy\n1K1ykdldnzcJXf3s/02hrB7A8CaPnmbqMiGZR0eJgtnY/5tmdonxMC2hEI7XzEWK\nbHyvYsTB3lhbHsQHzgv7dCs748+CFI8b+9E0sOaaisvjAU4LnAfsRe8vbJfsBwCr\n4oeVTHEPAgMBAAECggEAVIkuUX6+HhQjs3GBO7w66Es7fDo1SNYSxhnLST1p9tx9\n64OOaz8gmRy0hZFx3uWoaJ8J3DYfCNpixLNzX3MyyrLSrIdgRDtegnUExwbCBI7a\n/aBoov3Yw5xdGHOnVDfkPH3XR418XN0IQ1HFOdnevdjf6TneSbKnhQKK2UZtVElE\ni7AGcTj8kivr6bymQDJI8KpHO4TexoGqn0P9/Ww4mJdysmAXr8xVbR0/n8P1pKTD\nVKANm+vJ0Nebt9JmDgulSNf3XmUxxs9s0qEC7bGTOwIrn41QdiJvLt6eL4RpjnUY\nwm72yOfbgUOin7CVjtakDizehugXQ3Cbap4bJwGvwQKBgQDtpuTHuTpwPw35CESf\nBaYAp2u+K8Kabj/ufvsUfLMVFHE6eG7DX3OoJiqfcYomv0ZEOhrPBx75IJ9/4m2g\nMDUKnf3xEkGcyy5QlLurNv8T+AmjYtWlLnk+TKHeF3g6f+ijNG1PQEIh24TG03uG\nqKcICXZIcHzwTdTvDYoVb6oSzwKBgQDl0wg/+4bhMNAr/GsrWaclgfcgiZVMkd7O\nnu3ecuDmonepO/OZsDPon8YBpiCn2Hu+nFIx70gY+HZ4CD7OeYcyzvtSn1rvJp3k\nODFT7i7yz07pSqJUaRp3u9OoBXQsScChKseIJvN4LdsmuqOX52nfcs9KHihz4+Vz\nPWlrZdRNwQKBgEXBCr2knIZ9u3gw+RND8SmX+oPjDEePvKwgEUo+H8I8Mc/bsYce\n6S+dpD0QcmBVHCbCd0P07x5oeOhsaYjvHWJ0ZSjxFtkSuhFk1oC2r8AIuat/Qv4s\n2eFzVL9/XAavrHTa2oq8bazKZfqF8Gfh8MTnIhS5D7Lo5WsVKkaIc/75AoGBAJi6\nRSE/5cKAzdZtSErmqU0jsTbON4lK5uYod6r8bLjX/u1YCep4TgapJsyxucHQ+2sQ\nNw84FJGDjDb4Q8SyvkXlht7BR4zl/MdNEHrWLhzt52LhVj8CGbS3/VALT8ieuoRg\nCXlRaTrUPm7eWRj5kEIN6fM3V2qsaC7NAOF+KjgBAoGBAKbc5aeXfDcE3Hd4oD3t\naUIMEG1mx9nP0/vwA2K2TncIpY6pra2BqXspZ0fzByp92KInVLV2XBi7t6Oo1HDD\nh88cRhx6BcfM2eZwNQcS2GiI0dXynxmmVhaiAZHw88iXTfV2Yv8PtwrioeDt9rKt\nf/nF0TYwBYI5F8XFDirYSmMb\n-----END PRIVATE KEY-----\n",
+  "client_email": "shalatdiary@shalat-diary.iam.gserviceaccount.com",
+  "client_id": "117413033332188478883",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/shalatdiary%40shalat-diary.iam.gserviceaccount.com"
+}
