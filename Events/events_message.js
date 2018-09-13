@@ -1,5 +1,4 @@
-
-export function handleText(message, replyToken, source, client) {
+export function handleText(message, replyToken, source, client, db) {
     switch (message.text.toLowerCase()) {
         case 'test':
             const getDoc = db.collection('users').doc(profile.userId).get()
