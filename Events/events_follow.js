@@ -9,7 +9,8 @@ export function follow(replyToken, source, client) {
             credential: admin.credential.cert(serviceAccount)
         });
     }
-    const db = admin.firestore();
+    const settings = {timestampsInSnapshots: true};
+    const db = admin.firestore().settings(settings);
     if (idUser) {
         return client.getProfile(idUser)
             .then(profile => {
