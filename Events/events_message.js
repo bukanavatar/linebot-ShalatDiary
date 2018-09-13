@@ -26,41 +26,38 @@ export function handleText(message, replyToken, source, client, db) {
                                 .then(res => {
                                     console.log(res.data);
                                     client.replyMessage(replyToken, {
-                                        "type": "carousel",
-                                        "contents": [{
-                                            "type": "bubble",
-                                            "body": {
-                                                "type": "box",
-                                                "layout": "vertical",
-                                                "contents": [
-                                                    {
-                                                        "type": "image",
-                                                        "url": "https://www.w3schools.com/w3css/img_snowtops.jpg",
-                                                        "size": "full"
-                                                    }
-                                                ]
-                                            },
-                                            "footer": {
-                                                "type": "box",
-                                                "layout": "vertical",
-                                                "contents": [
-                                                    {
-                                                        "type": "spacer",
-                                                        "size": "xl"
+                                        type: 'template',
+                                        altText: 'Image carousel alt text',
+                                        template: {
+                                            type: 'image_carousel',
+                                            columns: [
+                                                {
+                                                    imageUrl: 'https://www.w3schools.com/w3css/img_snowtops.jpg',
+                                                    action: {label: 'Go to LINE', type: 'uri', uri: 'https://line.me'},
+                                                },
+                                                {
+                                                    imageUrl: 'https://www.w3schools.com/w3css/img_snowtops.jpg',
+                                                    action: {
+                                                        label: 'Say hello1',
+                                                        type: 'postback',
+                                                        data: 'hello こんにちは'
                                                     },
-                                                    {
-                                                        "type": "button",
-                                                        "action": {
-                                                            "type": "uri",
-                                                            "label": "" + res.data.data.Fajr + "",
-                                                            "uri": "https://example.com"
-                                                        },
-                                                        "style": "primary",
-                                                        "color": "#0000ff"
-                                                    }
-                                                ]
-                                            }
-                                        }]
+                                                },
+                                                {
+                                                    imageUrl: 'https://www.w3schools.com/w3css/img_snowtops.jpg',
+                                                    action: {label: 'Say message', type: 'message', text: 'Rice=米'},
+                                                },
+                                                {
+                                                    imageUrl: 'https://www.w3schools.com/w3css/img_snowtops.jpg',
+                                                    action: {
+                                                        label: 'datetime',
+                                                        type: 'datetimepicker',
+                                                        data: 'DATETIME',
+                                                        mode: 'datetime',
+                                                    },
+                                                },
+                                            ]
+                                        },
                                     }).catch(err => console.log("Error saat mengambil url", err));
                                 }).catch(err => console.log("Axios error get", err));
                         });
