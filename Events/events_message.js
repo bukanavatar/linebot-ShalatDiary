@@ -25,7 +25,7 @@ export function handleText(message, replyToken, source, client, db) {
                             axios.get(API_URL)
                                 .then(res => {
                                     console.log(res);
-                                    client.replyMessage({
+                                    client.replyMessage(replyToken, {
                                         type: 'text',
                                         text: 'res'
                                     }).catch(err => console.log("Error saat mengambil url", err));
