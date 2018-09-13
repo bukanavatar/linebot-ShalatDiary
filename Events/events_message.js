@@ -22,14 +22,14 @@ export function handleLocation(message, replyToken, source, client, db) {
                     const data = doc.data();
                     if (data.fLocationAwal === 1) {
                         const refDb = db.collection('users').doc(profile.userId);
-                        const setAwal = db.collection('users').doc(profile.userId).collection('lokasi').doc('lokasiAwal').set({
+                        const setAwal = refDb.collection('lokasi').doc('lokasiAwal').set({
                             'title': message.title,
                             'address': message.address,
                             'latitude': message.latitude,
                             'longitude': message.longitude,
                         }).catch(err => console.log("Ada Eror", err));
                         const setFlag = refDb.set({
-                            fLocationAwal: 0
+                            'fLocationAwal': 0
                         }, {merge: true});
                     }
                 }).catch(err => console.log("Get Doc Error", err));
