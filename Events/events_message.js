@@ -21,6 +21,7 @@ export function handleText(message, replyToken, source, client, db) {
                         .then(doc => {
                             const latitude = doc.data().latitude;
                             const longitude = doc.data().longitude;
+                            const address = doc.data().address;
                             const API_URL = `https://time.siswadi.com/pray/?lat=${latitude}&lng=${longitude}`;
                             axios.get(API_URL)
                                 .then(res => {
@@ -55,7 +56,7 @@ export function handleText(message, replyToken, source, client, db) {
                                                     {
                                                         type: "text",
                                                         margin: "sm",
-                                                        text: `${res.data.timezone}`,
+                                                        text: `${address}`,
                                                         wrap: true,
                                                         size: "xs",
                                                         color: "#b2b2b2"
