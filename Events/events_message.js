@@ -24,10 +24,43 @@ export function handleText(message, replyToken, source, client, db) {
                             const API_URL = `https://time.siswadi.com/pray/?lat=${latitude}&lng=${longitude}`;
                             axios.get(API_URL)
                                 .then(res => {
-                                    console.log(res);
+                                    console.log(res.data);
                                     client.replyMessage(replyToken, {
-                                        type: 'text',
-                                        text: 'res'
+                                        "type": "carousel",
+                                        "contents": [{
+                                            "type": "bubble",
+                                            "body": {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "contents": [
+                                                    {
+                                                        "type": "image",
+                                                        "url": "https://www.w3schools.com/w3css/img_snowtops.jpg",
+                                                        "size": "full"
+                                                    }
+                                                ]
+                                            },
+                                            "footer": {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "contents": [
+                                                    {
+                                                        "type": "spacer",
+                                                        "size": "xl"
+                                                    },
+                                                    {
+                                                        "type": "button",
+                                                        "action": {
+                                                            "type": "uri",
+                                                            "label": "" + res.data.data.Fajr + "",
+                                                            "uri": "https://example.com"
+                                                        },
+                                                        "style": "primary",
+                                                        "color": "#0000ff"
+                                                    }
+                                                ]
+                                            }
+                                        }]
                                     }).catch(err => console.log("Error saat mengambil url", err));
                                 }).catch(err => console.log("Axios error get", err));
                         });
