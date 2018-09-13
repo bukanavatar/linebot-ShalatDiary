@@ -26,173 +26,173 @@ export function handleText(message, replyToken, source, client, db) {
                                 .then(res => {
                                     console.log(res.data);
                                     client.replyMessage(replyToken, {
-                                        "type": "bubble",
-                                        "hero": {
-                                            "type": "image",
-                                            "url": "https://images.unsplash.com/photo-1536784710453-3fcac92d2dc8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=95d7afcb6afddbc83263582ffbc6e570&auto=format&fit=crop&w=1950&q=80",
-                                            "size": "full",
-                                            "aspectRatio": "20:13",
-                                            "aspectMode": "cover",
-                                            "action": {
-                                                "type": "uri",
-                                                "uri": "http://linecorp.com/"
+                                        type: "bubble",
+                                        hero: {
+                                            type: "image",
+                                            url: "https://images.unsplash.com/photo-1536784710453-3fcac92d2dc8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=95d7afcb6afddbc83263582ffbc6e570&auto=format&fit=crop&w=1950&q=80",
+                                            size: "full",
+                                            aspectRatio: "20:13",
+                                            aspectMode: "cover",
+                                            action: {
+                                                type: "uri",
+                                                uri: "http://linecorp.com/"
                                             }
                                         },
-                                        "body": {
-                                            "type": "box",
-                                            "layout": "vertical",
-                                            "contents": [
+                                        body: {
+                                            type: "box",
+                                            layout: "vertical",
+                                            contents: [
                                                 {
-                                                    "type": "text",
-                                                    "text": "Jadwal Shalat",
-                                                    "weight": "bold",
-                                                    "color": "#409665",
-                                                    "size": "xl"
+                                                    type: "text",
+                                                    text: "Jadwal Shalat",
+                                                    weight: "bold",
+                                                    color: "#409665",
+                                                    size: "xl"
                                                 },
                                                 {
-                                                    "type": "text",
-                                                    "margin": "sm",
-                                                    "text": "Menara Multimedia Jakartssssssssssssssssssssssssa",
-                                                    "wrap": true,
-                                                    "size": "xs",
-                                                    "color": "#b2b2b2"
+                                                    type: "text",
+                                                    margin: "sm",
+                                                    text: `${res.data.timezone}`,
+                                                    wrap: true,
+                                                    size: "xs",
+                                                    color: "#b2b2b2"
                                                 },
                                                 {
-                                                    "type": "separator"
+                                                    type: "separator"
                                                 },
                                                 {
-                                                    "type": "box",
-                                                    "layout": "vertical",
-                                                    "margin": "lg",
-                                                    "spacing": "sm",
-                                                    "contents": [
+                                                    type: "box",
+                                                    layout: "vertical",
+                                                    margin: "lg",
+                                                    spacing: "sm",
+                                                    contents: [
                                                         {
-                                                            "type": "box",
-                                                            "layout": "horizontal",
-                                                            "spacing": "xl",
-                                                            "contents": [
+                                                            type: "box",
+                                                            layout: "horizontal",
+                                                            spacing: "xl",
+                                                            contents: [
                                                                 {
-                                                                    "type": "text",
-                                                                    "text": "Subuh",
-                                                                    "color": "#aaaaaa",
-                                                                    "size": "xs",
-                                                                    "flex": 3
+                                                                    type: "text",
+                                                                    text: "Subuh",
+                                                                    color: "#aaaaaa",
+                                                                    size: "xs",
+                                                                    flex: 3
                                                                 },
                                                                 {
-                                                                    "type": "separator"
+                                                                    type: "separator"
                                                                 },
                                                                 {
-                                                                    "type": "text",
-                                                                    "text": "20:00",
-                                                                    "wrap": true,
-                                                                    "align": "end",
-                                                                    "color": "#666666",
-                                                                    "size": "sm",
-                                                                    "flex": 3
+                                                                    type: "text",
+                                                                    text: `${res.data.data.Fajr}`,
+                                                                    wrap: true,
+                                                                    align: "end",
+                                                                    color: "#666666",
+                                                                    size: "sm",
+                                                                    flex: 3
                                                                 }
                                                             ]
                                                         },
                                                         {
-                                                            "type": "box",
-                                                            "layout": "horizontal",
-                                                            "spacing": "xl",
-                                                            "contents": [
+                                                            type: "box",
+                                                            layout: "horizontal",
+                                                            spacing: "xl",
+                                                            contents: [
                                                                 {
-                                                                    "type": "text",
-                                                                    "text": "Dzuhur",
-                                                                    "color": "#aaaaaa",
-                                                                    "size": "xs",
-                                                                    "flex": 3
+                                                                    type: "text",
+                                                                    text: "Dzuhur",
+                                                                    color: "#aaaaaa",
+                                                                    size: "xs",
+                                                                    flex: 3
                                                                 },
                                                                 {
-                                                                    "type": "separator"
+                                                                    type: "separator"
                                                                 },
                                                                 {
-                                                                    "type": "text",
-                                                                    "text": "20:00",
-                                                                    "wrap": true,
-                                                                    "align": "end",
-                                                                    "color": "#666666",
-                                                                    "size": "sm",
-                                                                    "flex": 3
+                                                                    type: "text",
+                                                                    text: `${res.data.data.Dhuhr}`,
+                                                                    wrap: true,
+                                                                    align: "end",
+                                                                    color: "#666666",
+                                                                    size: "sm",
+                                                                    flex: 3
                                                                 }
                                                             ]
                                                         },
                                                         {
-                                                            "type": "box",
-                                                            "layout": "horizontal",
-                                                            "spacing": "xl",
-                                                            "contents": [
+                                                            type: "box",
+                                                            layout: "horizontal",
+                                                            spacing: "xl",
+                                                            contents: [
                                                                 {
-                                                                    "type": "text",
-                                                                    "text": "Ashar",
-                                                                    "color": "#aaaaaa",
-                                                                    "size": "xs",
-                                                                    "flex": 3
+                                                                    type: "text",
+                                                                    text: "Ashar",
+                                                                    color: "#aaaaaa",
+                                                                    size: "xs",
+                                                                    flex: 3
                                                                 },
                                                                 {
-                                                                    "type": "separator"
+                                                                    type: "separator"
                                                                 },
                                                                 {
-                                                                    "type": "text",
-                                                                    "text": "20:00",
-                                                                    "wrap": true,
-                                                                    "align": "end",
-                                                                    "color": "#666666",
-                                                                    "size": "sm",
-                                                                    "flex": 3
+                                                                    type: "text",
+                                                                    text: `${res.data.data.Asr}`,
+                                                                    wrap: true,
+                                                                    align: "end",
+                                                                    color: "#666666",
+                                                                    size: "sm",
+                                                                    flex: 3
                                                                 }
                                                             ]
                                                         },
                                                         {
-                                                            "type": "box",
-                                                            "layout": "horizontal",
-                                                            "spacing": "xl",
-                                                            "contents": [
+                                                            type: "box",
+                                                            layout: "horizontal",
+                                                            spacing: "xl",
+                                                            contents: [
                                                                 {
-                                                                    "type": "text",
-                                                                    "text": "Maghrib",
-                                                                    "color": "#aaaaaa",
-                                                                    "size": "xs",
-                                                                    "flex": 3
+                                                                    type: "text",
+                                                                    text: "Maghrib",
+                                                                    color: "#aaaaaa",
+                                                                    size: "xs",
+                                                                    flex: 3
                                                                 },
                                                                 {
-                                                                    "type": "separator"
+                                                                    type: "separator"
                                                                 },
                                                                 {
-                                                                    "type": "text",
-                                                                    "text": "20:00",
-                                                                    "wrap": true,
-                                                                    "align": "end",
-                                                                    "color": "#666666",
-                                                                    "size": "sm",
-                                                                    "flex": 3
+                                                                    type: "text",
+                                                                    text: `${res.data.data.Maghrib}`,
+                                                                    wrap: true,
+                                                                    align: "end",
+                                                                    color: "#666666",
+                                                                    size: "sm",
+                                                                    flex: 3
                                                                 }
                                                             ]
                                                         },
                                                         {
-                                                            "type": "box",
-                                                            "layout": "horizontal",
-                                                            "spacing": "xl",
-                                                            "contents": [
+                                                            type: "box",
+                                                            layout: "horizontal",
+                                                            spacing: "xl",
+                                                            contents: [
                                                                 {
-                                                                    "type": "text",
-                                                                    "text": "Isya",
-                                                                    "color": "#aaaaaa",
-                                                                    "size": "xs",
-                                                                    "flex": 3
+                                                                    type: "text",
+                                                                    text: "Isya",
+                                                                    color: "#aaaaaa",
+                                                                    size: "xs",
+                                                                    flex: 3
                                                                 },
                                                                 {
-                                                                    "type": "separator"
+                                                                    type: "separator"
                                                                 },
                                                                 {
-                                                                    "type": "text",
-                                                                    "text": "20:00",
-                                                                    "wrap": true,
-                                                                    "align": "end",
-                                                                    "color": "#666666",
-                                                                    "size": "sm",
-                                                                    "flex": 3
+                                                                    type: "text",
+                                                                    text: `${res.data.data.Isha}`,
+                                                                    wrap: true,
+                                                                    align: "end",
+                                                                    color: "#666666",
+                                                                    size: "sm",
+                                                                    flex: 3
                                                                 }
                                                             ]
                                                         }
@@ -200,28 +200,28 @@ export function handleText(message, replyToken, source, client, db) {
                                                 }
                                             ]
                                         },
-                                        "footer": {
-                                            "type": "box",
-                                            "layout": "vertical",
-                                            "spacing": "sm",
-                                            "contents": [
+                                        footer: {
+                                            type: "box",
+                                            layout: "vertical",
+                                            spacing: "sm",
+                                            contents: [
                                                 {
-                                                    "type": "button",
-                                                    "style": "primary",
-                                                    "height": "sm",
-                                                    "action": {
-                                                        "type": "postback",
-                                                        "label": "Ganti Lokasi",
-                                                        "data": "changeLocation",
-                                                        "text": "Ganti Lokasi"
+                                                    type: "button",
+                                                    style: "primary",
+                                                    height: "sm",
+                                                    action: {
+                                                        type: "postback",
+                                                        label: "Ganti Lokasi",
+                                                        data: "changeLocation",
+                                                        text: "Ganti Lokasi"
                                                     }
                                                 },
                                                 {
-                                                    "type": "spacer",
-                                                    "size": "sm"
+                                                    type: "spacer",
+                                                    size: "sm"
                                                 }
                                             ],
-                                            "flex": 0
+                                            flex: 0
                                         }
                                     }).catch(err => console.log("Error saat mengambil url", err));
                                 }).catch(err => console.log("Axios error get", err));
