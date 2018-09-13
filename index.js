@@ -22,7 +22,9 @@ const configFirebase = {
     apiKey: "AIzaSyCAveXkK3a66orD-6ouTnj7S_FPIS6yQ-I"
 };
 
-firebase.initializeApp(configFirebase);
+if (!firebase.apps.length) {
+    firebase.initializeApp(configFirebase);
+}
 
 app.post('/callback', middleware(config), (req, res) => {
     res.writeHead(200);
