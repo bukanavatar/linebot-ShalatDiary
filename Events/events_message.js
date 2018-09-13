@@ -21,14 +21,20 @@ export function handleLocation(message, replyToken, source, client, db) {
                 .then(doc => {
                     const data = doc.data();
                     if (data.fLocationAwal === 1) {
+                        client.replyMessage(replyToken, {
+                            title: message.title,
+                            address: message.address,
+                            latitude: message.latitude,
+                            longitude: message.longitude,
+                        });
                         const refDb = db.collection('users').doc(profile.userId);
-                        const setDbAwal = refDb.collection('lokasi').doc('lokasiAwal')
-                            .set({
-                                title: message.title,
-                                address: message.address,
-                                latitude: message.latitude,
-                                longitude: message.longitude,
-                            });
+                        // const setDbAwal = refDb.collection('lokasi').doc('lokasiAwal')
+                        //     .set({
+                        //         title: message.title,
+                        //         address: message.address,
+                        //         latitude: message.latitude,
+                        //         longitude: message.longitude,
+                        //     });
                         const setFlag = refDb.set({
                             fLocationAwal: 0
                         }, {merge: true});
