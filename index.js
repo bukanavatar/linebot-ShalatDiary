@@ -9,6 +9,7 @@ import {follow} from './Events/events_follow';
 import {handleLocation, handleText} from './Events/events_message';
 import admin from "firebase-admin";
 import serviceAccount from "./shalat-diary-b25ad401ff6c";
+import {handlePostback} from "./Events/events_postback";
 
 const app = express();
 
@@ -51,6 +52,8 @@ function handleEvent(event) {
     switch (event.type) {
         case 'follow':
             return follow(event.replyToken, event.source, client, db);
+        case 'postback':
+            return handlePostback(event.replyToken, event.source, event.postback, client, db);
         case 'message':
             const message = event.message;
             switch (message.type) {

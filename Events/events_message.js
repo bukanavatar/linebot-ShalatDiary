@@ -26,38 +26,203 @@ export function handleText(message, replyToken, source, client, db) {
                                 .then(res => {
                                     console.log(res.data);
                                     client.replyMessage(replyToken, {
-                                        type: 'template',
-                                        altText: 'Image carousel alt text',
-                                        template: {
-                                            type: 'image_carousel',
-                                            columns: [
+                                        "type": "bubble",
+                                        "hero": {
+                                            "type": "image",
+                                            "url": "https://images.unsplash.com/photo-1536784710453-3fcac92d2dc8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=95d7afcb6afddbc83263582ffbc6e570&auto=format&fit=crop&w=1950&q=80",
+                                            "size": "full",
+                                            "aspectRatio": "20:13",
+                                            "aspectMode": "cover",
+                                            "action": {
+                                                "type": "uri",
+                                                "uri": "http://linecorp.com/"
+                                            }
+                                        },
+                                        "body": {
+                                            "type": "box",
+                                            "layout": "vertical",
+                                            "contents": [
                                                 {
-                                                    imageUrl: 'https://www.w3schools.com/w3css/img_snowtops.jpg',
-                                                    action: {label: 'Go to LINE', type: 'uri', uri: 'https://line.me'},
+                                                    "type": "text",
+                                                    "text": "Jadwal Shalat",
+                                                    "weight": "bold",
+                                                    "color": "#409665",
+                                                    "size": "xl"
                                                 },
                                                 {
-                                                    imageUrl: 'https://www.w3schools.com/w3css/img_snowtops.jpg',
-                                                    action: {
-                                                        label: 'Say hello1',
-                                                        type: 'postback',
-                                                        data: 'hello こんにちは'
-                                                    },
+                                                    "type": "text",
+                                                    "margin": "sm",
+                                                    "text": "Menara Multimedia Jakartssssssssssssssssssssssssa",
+                                                    "wrap": true,
+                                                    "size": "xs",
+                                                    "color": "#b2b2b2"
                                                 },
                                                 {
-                                                    imageUrl: 'https://www.w3schools.com/w3css/img_snowtops.jpg',
-                                                    action: {label: 'Say message', type: 'message', text: 'Rice=米'},
+                                                    "type": "separator"
                                                 },
                                                 {
-                                                    imageUrl: 'https://www.w3schools.com/w3css/img_snowtops.jpg',
-                                                    action: {
-                                                        label: 'datetime',
-                                                        type: 'datetimepicker',
-                                                        data: 'DATETIME',
-                                                        mode: 'datetime',
-                                                    },
-                                                },
+                                                    "type": "box",
+                                                    "layout": "vertical",
+                                                    "margin": "lg",
+                                                    "spacing": "sm",
+                                                    "contents": [
+                                                        {
+                                                            "type": "box",
+                                                            "layout": "horizontal",
+                                                            "spacing": "xl",
+                                                            "contents": [
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "Subuh",
+                                                                    "color": "#aaaaaa",
+                                                                    "size": "xs",
+                                                                    "flex": 3
+                                                                },
+                                                                {
+                                                                    "type": "separator"
+                                                                },
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "20:00",
+                                                                    "wrap": true,
+                                                                    "align": "end",
+                                                                    "color": "#666666",
+                                                                    "size": "sm",
+                                                                    "flex": 3
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "box",
+                                                            "layout": "horizontal",
+                                                            "spacing": "xl",
+                                                            "contents": [
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "Dzuhur",
+                                                                    "color": "#aaaaaa",
+                                                                    "size": "xs",
+                                                                    "flex": 3
+                                                                },
+                                                                {
+                                                                    "type": "separator"
+                                                                },
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "20:00",
+                                                                    "wrap": true,
+                                                                    "align": "end",
+                                                                    "color": "#666666",
+                                                                    "size": "sm",
+                                                                    "flex": 3
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "box",
+                                                            "layout": "horizontal",
+                                                            "spacing": "xl",
+                                                            "contents": [
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "Ashar",
+                                                                    "color": "#aaaaaa",
+                                                                    "size": "xs",
+                                                                    "flex": 3
+                                                                },
+                                                                {
+                                                                    "type": "separator"
+                                                                },
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "20:00",
+                                                                    "wrap": true,
+                                                                    "align": "end",
+                                                                    "color": "#666666",
+                                                                    "size": "sm",
+                                                                    "flex": 3
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "box",
+                                                            "layout": "horizontal",
+                                                            "spacing": "xl",
+                                                            "contents": [
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "Maghrib",
+                                                                    "color": "#aaaaaa",
+                                                                    "size": "xs",
+                                                                    "flex": 3
+                                                                },
+                                                                {
+                                                                    "type": "separator"
+                                                                },
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "20:00",
+                                                                    "wrap": true,
+                                                                    "align": "end",
+                                                                    "color": "#666666",
+                                                                    "size": "sm",
+                                                                    "flex": 3
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "box",
+                                                            "layout": "horizontal",
+                                                            "spacing": "xl",
+                                                            "contents": [
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "Isya",
+                                                                    "color": "#aaaaaa",
+                                                                    "size": "xs",
+                                                                    "flex": 3
+                                                                },
+                                                                {
+                                                                    "type": "separator"
+                                                                },
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "20:00",
+                                                                    "wrap": true,
+                                                                    "align": "end",
+                                                                    "color": "#666666",
+                                                                    "size": "sm",
+                                                                    "flex": 3
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
                                             ]
                                         },
+                                        "footer": {
+                                            "type": "box",
+                                            "layout": "vertical",
+                                            "spacing": "sm",
+                                            "contents": [
+                                                {
+                                                    "type": "button",
+                                                    "style": "primary",
+                                                    "height": "sm",
+                                                    "action": {
+                                                        "type": "postback",
+                                                        "label": "Ganti Lokasi",
+                                                        "data": "changeLocation",
+                                                        "text": "Ganti Lokasi"
+                                                    }
+                                                },
+                                                {
+                                                    "type": "spacer",
+                                                    "size": "sm"
+                                                }
+                                            ],
+                                            "flex": 0
+                                        }
                                     }).catch(err => console.log("Error saat mengambil url", err));
                                 }).catch(err => console.log("Axios error get", err));
                         });
@@ -77,18 +242,32 @@ export function handleLocation(message, replyToken, source, client, db) {
                     //Jika User baru menambahkan bot
                     if (data.fLocationAwal === 1) {
                         const refDb = db.collection('users').doc(profileId);
-                        const dataMessage = [message.address.toString(), message.latitude.toString(), message.longitude.toString()];
                         const setAwal = refDb.collection('lokasi').doc('lokasiAwal').set({
-                            'address': dataMessage[0],
-                            'latitude': dataMessage[1],
-                            'longitude': dataMessage[2],
+                            'address': message.address.toString(),
+                            'latitude': message.latitude.toString(),
+                            'longitude': message.longitude.toString(),
                         }, {merge: true}).catch(err => console.log("Ada Eror", err));
                         const setFlag = refDb.set({
                             'fLocationAwal': 0
                         }, {merge: true}).then(() => {
                             client.replyMessage(replyToken, {
                                 type: 'text',
-                                text: `Terima kasih sudah share lokasimu, sekarang kamu berada di ${message.address}`
+                                text: `Terima kasih sudah share lokasimu, sekarang kamu berada di ${message.address.toString()}`
+                            });
+                        });
+                    } else if (data.fLocationGanti === 1) {
+                        const refDb = db.collection('users').doc(profileId);
+                        const setGantiLoc = refDb.collection('lokasi').doc('lokasiAwal').set({
+                            'address': message.address.toString(),
+                            'latitude': message.latitude.toString(),
+                            'longitude': message.longitude.toString(),
+                        }, {merge: true}).catch(err => console.log("Ada error ketika mengupdate tempat", err));
+                        const setFlag = refDb.set({
+                            'fLocationGanti': 0
+                        }, {merge: true}).then(() => {
+                            client.replyMessage(replyToken, {
+                                type: 'text',
+                                text: `Lokasi kamu sudah diupdate, sekarang kamu berada di ${message.address.toString()}`
                             });
                         });
                     }
