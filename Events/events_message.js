@@ -17,17 +17,18 @@ export function handleLocation(message, replyToken, source, client, db) {
     const idUser = source.userId;
     return client.getProfile(idUser)
         .then(profile => {
-            const getDoc = db.collection('users').doc(profile.userId).get()
+            const profileId = profile.userId;
+            const getDoc = db.collection('users').doc(profileId).get()
                 .then(doc => {
                     const data = doc.data();
                     if (data.fLocationAwal === 1) {
-                        const refDb = db.collection('users').doc(profile.userId);
-                        const setAwal = refDb.collection('lokasi').doc('lokasiAwal').set({
+                        const refDb = db.collection('users').doc(profileId);
+                        const setAwal = refDb.set({
                             'title': message.title,
                             'address': message.address,
                             'latitude': message.latitude,
                             'longitude': message.longitude,
-                        }).catch(err => console.log("Ada Eror", err));
+                        }, {merge: true}).catch(err => console.log("Ada Eror", err));
                         const setFlag = refDb.set({
                             'fLocationAwal': 0
                         }, {merge: true});
