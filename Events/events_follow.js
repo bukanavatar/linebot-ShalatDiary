@@ -4,9 +4,11 @@ import serviceAccount from '../shalat-diary-b25ad401ff6c.json';
 
 export function follow(replyToken, source, client) {
     const idUser = source.userId;
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount)
-    });
+    if (!admin.apps.length) {
+        admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount)
+        });
+    }
     const db = admin.firestore();
     if (idUser) {
         return client.getProfile(idUser)
