@@ -1,16 +1,39 @@
+import axios from 'axios';
+
 export function handleText(message, replyToken, source, client, db) {
-    switch (message.text.toLowerCase()) {
-        case 'test':
-            const getDoc = db.collection('users').doc('U5b8038d4acf2c3c808e89bd8fe75f281').get()
-                .then(doc => {
-                    console.log(doc.data());
-                });
-            client.replyMessage(replyToken, [{
-                type: 'text',
-                text: doc.data()
-            }])
-                .catch(err => console.log("ada error", err));
-    }
+    const idUser = source.userId;
+    return client.getProfile(idUser)
+        .then(profile => {
+            const profileId = profile.userId;
+            switch (message.text.toLowerCase()) {
+                case 'test':
+                    const getDoc = db.collection('users').doc(profileId).get()
+                        .then(doc => {
+                            console.log(doc.data());
+                            client.replyMessage(replyToken, [{
+                                type: 'text',
+                                text: doc.data()
+                            }])
+                        }).catch(err => console.log("ada error", err));
+                    break;
+                case 'jadwal shalat':
+                    const dbRefLoc = db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get()
+                        .then(doc => {
+                            const latitude = doc.data().latitude;
+                            const longitude = doc.data().longitude;
+                            const API_URL = `https://time.siswadi.com/pray/?lat=${latitude}&lng=${longitude}`;
+                            axios.get(API_URL)
+                                .then(res => {
+                                    console.log(res);
+                                    client.replyMessage({
+                                        type: 'text',
+                                        text: 'res'
+                                    }).catch(err => console.log("Error saat mengambil url", err));
+                                }).catch(err => console.log("Axios error get", err));
+                        });
+            }
+        })
+
 }
 
 export function handleLocation(message, replyToken, source, client, db) {
@@ -21,11 +44,8 @@ export function handleLocation(message, replyToken, source, client, db) {
             const getDoc = db.collection('users').doc(profileId).get()
                 .then(doc => {
                     const data = doc.data();
+                    //Jika User baru menambahkan bot
                     if (data.fLocationAwal === 1) {
-                        client.replyMessage(replyToken, {
-                            type: 'text',
-                            text: `${message.latitude},${message.title},${message.longitude},${message.address}`
-                        });
                         const refDb = db.collection('users').doc(profileId);
                         const dataMessage = [message.address.toString(), message.latitude.toString(), message.longitude.toString()];
                         const setAwal = refDb.collection('lokasi').doc('lokasiAwal').set({
@@ -35,7 +55,12 @@ export function handleLocation(message, replyToken, source, client, db) {
                         }, {merge: true}).catch(err => console.log("Ada Eror", err));
                         const setFlag = refDb.set({
                             'fLocationAwal': 0
-                        }, {merge: true});
+                        }, {merge: true}).then(() => {
+                            client.replyMessage(replyToken, {
+                                type: 'text',
+                                text: `Terima kasih sudah share lokasimu, sekarang kamu berada di ${message.address}`
+                            });
+                        });
                     }
                 }).catch(err => console.log("Get Doc Error", err));
         }).catch(err => console.log("Error get User dari Location", err));
