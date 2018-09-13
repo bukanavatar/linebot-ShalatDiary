@@ -22,6 +22,10 @@ export function handleLocation(message, replyToken, source, client, db) {
                 .then(doc => {
                     const data = doc.data();
                     if (data.fLocationAwal === 1) {
+                        client.replyMessage(replyToken, {
+                            type: 'text',
+                            text: message.latitude
+                        });
                         const refDb = db.collection('users').doc(profileId);
                         const setAwal = refDb.set({
                             'title': message.title,
