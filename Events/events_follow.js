@@ -1,16 +1,6 @@
-import admin from 'firebase-admin';
-
-import serviceAccount from '../shalat-diary-b25ad401ff6c.json';
-
-export function follow(replyToken, source, client) {
+export function follow(replyToken, source, client, db) {
     const idUser = source.userId;
-    if (!admin.apps.length) {
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount)
-        });
-    }
-    const settings = {timestampsInSnapshots: true};
-    const db = admin.firestore().settings(settings);
+
     if (idUser) {
         return client.getProfile(idUser)
             .then(profile => {
@@ -42,6 +32,10 @@ export function follow(replyToken, source, client) {
             type: "sticker",
             packageId: "1",
             stickerId: "114"
-        }])
+        }]).then(reply => {
+            console.log(reply)
+        }).catch(err => {
+            console.log("Error Replying message", err);
+        })
     }
 }
