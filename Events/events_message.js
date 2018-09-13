@@ -27,11 +27,11 @@ export function handleLocation(message, replyToken, source, client, db) {
                             text: message.latitude
                         });
                         const refDb = db.collection('users').doc(profileId);
-                        const setAwal = refDb.set({
-                            'title': message.title,
-                            'address': message.address,
-                            'latitude': message.latitude,
-                            'longitude': message.longitude,
+                        const setAwal = refDb.collection('lokasi').doc('lokasiAwal').set({
+                            'title': message.title.toString(),
+                            'address': message.address.toString(),
+                            'latitude': message.latitude.toString(),
+                            'longitude': message.longitude.toString(),
                         }, {merge: true}).catch(err => console.log("Ada Eror", err));
                         const setFlag = refDb.set({
                             'fLocationAwal': 0
