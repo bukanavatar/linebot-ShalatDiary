@@ -33,6 +33,18 @@ export function follow(replyToken, source, client, db) {
             type: "sticker",
             packageId: "1",
             stickerId: "114"
+        }, {
+            type: 'template',
+            altText: 'Share Lokasi Awal',
+            template: {
+                type: 'buttons',
+                thumbnailImageUrl: 'https://images.unsplash.com/photo-1533615767566-273ffe95ed17?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=030e680a09fbe23f188b56248a6e30e6&auto=format&fit=crop&w=1027&q=80',
+                title: 'Share Lokasimu',
+                text: 'Silahkan share lokasimu untuk keperluan chatbot ini',
+                actions: [
+                    {label: 'Share Lokasi', type: 'location'}
+                ],
+            },
         }]).catch(err => {
             console.log("Error Replying message", err);
         })
