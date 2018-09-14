@@ -39,7 +39,7 @@ export function follow(replyToken, source, client, db) {
             template: {
                 type: 'buttons',
                 thumbnailImageUrl: 'https://images.unsplash.com/photo-1533615767566-273ffe95ed17?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=030e680a09fbe23f188b56248a6e30e6&auto=format&fit=crop&w=1027&q=80',
-                imageAspectRation: 'rectangle',
+                imageAspectRatio: 'rectangle',
                 imageSize: 'cover',
                 title: 'Share Lokasimu',
                 actions: [{
