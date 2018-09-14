@@ -58,9 +58,6 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                                         color: "#b2b2b2"
                                                     },
                                                     {
-                                                        type: "separator"
-                                                    },
-                                                    {
                                                         type: "box",
                                                         layout: "vertical",
                                                         margin: "lg",
@@ -78,9 +75,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                                                         size: "xs",
                                                                         flex: 3
                                                                     },
-                                                                    {
-                                                                        type: "separator"
-                                                                    },
+
                                                                     {
                                                                         type: "text",
                                                                         text: `${res.data.data.Fajr}`,
