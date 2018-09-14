@@ -33,19 +33,6 @@ export function follow(replyToken, source, client, db) {
             type: "sticker",
             packageId: "1",
             stickerId: "114"
-        }, {
-            type: 'template',
-            altText: 'Silahkan Share Lokasimu yang sekarang',
-            template: {
-                type: 'buttons',
-                title: 'Share Lokasimu',
-                actions: [
-                    {
-                        type: 'location',
-                        label: 'Klik disini untuk share lokasi'
-                    }
-                ]
-            }
         }]).catch(err => {
             console.log("Error Replying message", err);
         })
