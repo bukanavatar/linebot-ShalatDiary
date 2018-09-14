@@ -253,7 +253,17 @@ export function handleLocation(message, replyToken, source, client, db) {
                         }, {merge: true}).then(() => {
                             client.replyMessage(replyToken, {
                                 type: 'text',
-                                text: `Terima kasih sudah share lokasimu, sekarang kamu berada di ${message.address.toString()}`
+                                text: `Terima kasih sudah share lokasimu, sekarang kamu berada di ${message.address.toString()}`,
+                                quickReply: {
+                                    items: [{
+                                        type: "action",
+                                        action: {
+                                            type: "message",
+                                            label: "Jadwal Shalat",
+                                            text: "Jadwal Shalat"
+                                        }
+                                    }]
+                                }
                             });
                         });
                     } else if (data.fLocationGanti === 1) {
@@ -268,7 +278,24 @@ export function handleLocation(message, replyToken, source, client, db) {
                         }, {merge: true}).then(() => {
                             client.replyMessage(replyToken, {
                                 type: 'text',
-                                text: `Lokasi kamu sudah diupdate, sekarang kamu berada di ${message.address.toString()}`
+                                text: `Lokasi kamu sudah diupdate, sekarang kamu berada di ${message.address.toString()}`,
+                                quickReply: {
+                                    items: [{
+                                        type: "action",
+                                        action: {
+                                            type: "message",
+                                            label: "Jadwal Shalat",
+                                            text: "Jadwal Shalat"
+                                        }
+                                    }, {
+                                        type: "action",
+                                        action: {
+                                            type: "message",
+                                            label: "Test",
+                                            text: "test"
+                                        }
+                                    }]
+                                }
                             });
                         });
                     }

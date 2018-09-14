@@ -10,7 +10,16 @@ export function handlePostback(replyToken, source, postback, client, db) {
                     }, {merge: true}).catch(err => console.log("disini ada error", err));
                     client.replyMessage(replyToken, {
                         type: "text",
-                        text: "Silahkan share lokasi anda"
+                        text: "Silahkan share lokasimu yang baru",
+                        quickReply: {
+                            items: [{
+                                type: "action",
+                                action: {
+                                    type: "location",
+                                    label: "Kirim Lokasi Baru"
+                                }
+                            }]
+                        }
                     });
             }
         });
