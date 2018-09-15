@@ -282,7 +282,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                                 kirimTambahShalat("Maghrib", profileId, false);
                                             } else if (waktuSekarang > waktuIsya && waktuSekarang < "23:59") {
                                                 kirimTambahShalat("Isya", profileId, false);
-                                            } else if (waktuSekarang > "23:59" && waktuSekarang < waktuSubuh) {
+                                            } else if (waktuSekarang > "00:00" && waktuSekarang < waktuSubuh) {
                                                 kirimTambahShalat("Isya", profileId, true);
                                             }
                                         }).catch(err => console.log("Ada error ambil API jam", err));
