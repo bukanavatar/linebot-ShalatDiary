@@ -10,7 +10,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                 case 'test':
                     client.replyMessage(replyToken, {
                         type: 'text',
-                        text: moment.unix(timestamp).format("DD MMM YYYY")
+                        text: moment.unix(timestamp).format("HH:mm")
                     });
                     break;
                 case 'jadwal shalat':
