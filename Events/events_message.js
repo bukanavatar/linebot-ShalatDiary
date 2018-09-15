@@ -17,6 +17,9 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                             }, {
                                 type: 'text',
                                 text: res.data.formatted.toString()
+                            }, {
+                                type: 'text',
+                                text: timestamp.toString()
                             }]);
                         });
                     break;
