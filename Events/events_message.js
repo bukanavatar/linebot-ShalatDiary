@@ -8,10 +8,14 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
             const profileId = profile.userId;
             switch (message.text.toLowerCase()) {
                 case 'test':
-                    client.replyMessage(replyToken, {
-                        type: 'text',
-                        text: moment.unix(timestamp).format("HH:mm")
-                    });
+                    const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=-6.174718&lng=106.827018&time=${timestamp}`;
+                    axios.get(API_JAM)
+                        .then(res => {
+                            client.replyMessage(replyToken, {
+                                type: 'text',
+                                text: moment(res.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString()
+                            });
+                        });
                     break;
                 case 'jadwal shalat':
                     const dbRefLoc = db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get()
