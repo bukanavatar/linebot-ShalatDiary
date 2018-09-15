@@ -273,15 +273,15 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                             const waktuMaghrib = res.data.data.Maghrib;
                                             const waktuIsya = res.data.data.Isha;
                                             if (waktuSekarang > waktuSubuh && waktuSekarang < waktuDzuhur) {
-                                                kirimTambahShalat("Subuh", profileId, tanggalSekarang);
+                                                kirimTambahShalat("Subuh", profileId, tanggalSekarang, false);
                                             } else if (waktuSekarang > waktuDzuhur && waktuSekarang < waktuAshar) {
-                                                kirimTambahShalat("Dzuhur", profileId, tanggalSekarang);
+                                                kirimTambahShalat("Dzuhur", profileId, tanggalSekarang, false);
                                             } else if (waktuSekarang > waktuAshar && waktuSekarang < waktuMaghrib) {
-                                                kirimTambahShalat("Ashar", profileId, tanggalSekarang);
+                                                kirimTambahShalat("Ashar", profileId, tanggalSekarang, false);
                                             } else if (waktuSekarang > waktuMaghrib && waktuSekarang < waktuIsya) {
-                                                kirimTambahShalat("Ashar", profileId, tanggalSekarang)
+                                                kirimTambahShalat("Maghrib", profileId, tanggalSekarang, false);
                                             } else if (waktuSekarang > waktuIsya && waktuSekarang < "23:59") {
-                                                kirimTambahShalat("Isya", profileId, tanggalSekarang)
+                                                kirimTambahShalat("Isya", profileId, tanggalSekarang, false);
                                             } else if (waktuSekarang > "23:59" && waktuSekarang < waktuSubuh) {
                                                 kirimTambahShalat("Isya", profileId, tanggalSekarang, true);
                                             }
@@ -334,7 +334,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
         if (waktuKemarin) {
             const setFlagKemarin = dbRef.set({
                 'fTambahShalatKemarin': 1
-            });
+            }, {merge: true});
         }
         const setFlagTambah = dbRef.set({
             'fTambahShalat': 1
