@@ -455,6 +455,13 @@ export function handleLocation(message, replyToken, source, client, db) {
                                             label: "Jadwal Shalat",
                                             text: "Jadwal Shalat"
                                         }
+                                    }, {
+                                        type: "action",
+                                        action: {
+                                            type: "message",
+                                            label: "Tambah Record Shalat",
+                                            text: "tambah shalat"
+                                        }
                                     }]
                                 }
                             });
@@ -486,6 +493,13 @@ export function handleLocation(message, replyToken, source, client, db) {
                                             type: "message",
                                             label: "Test",
                                             text: "test"
+                                        }
+                                    }, {
+                                        type: "action",
+                                        action: {
+                                            type: "message",
+                                            label: "Tambah Record Shalat",
+                                            text: "tambah shalat"
                                         }
                                     }]
                                 }
