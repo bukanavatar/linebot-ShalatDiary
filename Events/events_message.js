@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 export function handleText(message, replyToken, source, timestamp, client, db) {
     const idUser = source.userId;
@@ -9,7 +10,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                 case 'test':
                     client.replyMessage(replyToken, {
                         type: 'text',
-                        text: new Date(timestamp).toString()
+                        text: moment.unix(timestamp).format("DD MMM YYYY")
                     });
                     break;
                 case 'jadwal shalat':
