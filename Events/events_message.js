@@ -273,17 +273,17 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                             const waktuMaghrib = res.data.data.Maghrib;
                                             const waktuIsya = res.data.data.Isha;
                                             if (waktuSekarang > waktuSubuh && waktuSekarang < waktuDzuhur) {
-                                                kirimTambahShalat("Subuh", profileId, tanggalSekarang, false);
+                                                kirimTambahShalat("Subuh", profileId, false);
                                             } else if (waktuSekarang > waktuDzuhur && waktuSekarang < waktuAshar) {
-                                                kirimTambahShalat("Dzuhur", profileId, tanggalSekarang, false);
+                                                kirimTambahShalat("Dzuhur", profileId, false);
                                             } else if (waktuSekarang > waktuAshar && waktuSekarang < waktuMaghrib) {
-                                                kirimTambahShalat("Ashar", profileId, tanggalSekarang, false);
+                                                kirimTambahShalat("Ashar", profileId, false);
                                             } else if (waktuSekarang > waktuMaghrib && waktuSekarang < waktuIsya) {
-                                                kirimTambahShalat("Maghrib", profileId, tanggalSekarang, false);
+                                                kirimTambahShalat("Maghrib", profileId, false);
                                             } else if (waktuSekarang > waktuIsya && waktuSekarang < "23:59") {
-                                                kirimTambahShalat("Isya", profileId, tanggalSekarang, false);
+                                                kirimTambahShalat("Isya", profileId, false);
                                             } else if (waktuSekarang > "23:59" && waktuSekarang < waktuSubuh) {
-                                                kirimTambahShalat("Isya", profileId, tanggalSekarang, true);
+                                                kirimTambahShalat("Isya", profileId, true);
                                             }
                                         }).catch(err => console.log("Ada error ambil API jam", err));
                                 }).catch(err => console.log("Ada error ketika ambil API Jadwal Shalat", err));
