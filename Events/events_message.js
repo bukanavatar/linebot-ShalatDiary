@@ -3,7 +3,7 @@ import moment from 'moment';
 
 let tanggalSekarang = '';
 let shalatSekarang = '';
-const waktuShalat = ['jamaah', 'sendiri', 'telat', 'tidakShalat'];
+const waktuShalat = ['jamaah', 'sendiri', 'telat', 'tidak shalat'];
 let profileId = '';
 
 export function handleText(message, replyToken, source, timestamp, client, db) {
@@ -277,11 +277,13 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                             } else if (waktuSekarang > waktuDzuhur && waktuSekarang < waktuAshar) {
                                                 kirimTambahShalat("Dzuhur", profileId, tanggalSekarang);
                                             } else if (waktuSekarang > waktuAshar && waktuSekarang < waktuMaghrib) {
-                                                kirimTambahShalat("Maghrib", profileId, tanggalSekarang);
+                                                kirimTambahShalat("Ashar", profileId, tanggalSekarang);
+                                            } else if (waktuSekarang > waktuMaghrib && waktuSekarang < waktuIsya) {
+                                                kirimTambahShalat("Ashar", profileId, tanggalSekarang)
                                             } else if (waktuSekarang > waktuIsya && waktuSekarang < "23:59") {
                                                 kirimTambahShalat("Isya", profileId, tanggalSekarang)
                                             } else if (waktuSekarang > "23:59" && waktuSekarang < waktuSubuh) {
-                                                kirimTambahShalat("Isya", profileId, tanggalSekarang)
+                                                kirimTambahShalat("Isya", profileId, tanggalSekarang, true);
                                             }
                                         }).catch(err => console.log("Ada error ambil API jam", err));
                                 }).catch(err => console.log("Ada error ketika ambil API Jadwal Shalat", err));
@@ -308,7 +310,8 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
             .then(doc => {
                 const data = doc.data();
                 if (data.fTambahShalat && data.fTambahShalat === 1) {
-                    const setTanggal = dbRef.collection('tanggal').doc(tanggalSekarang).set({
+                    const tanggal = moment(tanggalSekarang);
+                    const setTanggal = dbRef.collection('tanggal').doc(data.fTambahShalatKemarin === 1 ? tanggal.subtract(1, 'days').format("YYYY-MM-DD").toString() : tanggal.format("YYYY-MM-DD").toString()).set({
                         [shalatSekarang]: waktuShalatA.toString()
                     }, {merge: true})
                         .then(() => {
@@ -324,9 +327,15 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                 }
             }).catch(err => console.log("Error ketika get data shalat", err));
     }
-    function kirimTambahShalat(waktuShalat, profileId) {
+
+    function kirimTambahShalat(waktuShalat, profileId, waktuKemarin) {
         const dbRef = db.collection('users').doc(profileId);
         shalatSekarang = waktuShalat;
+        if (waktuKemarin) {
+            const setFlagKemarin = dbRef.set({
+                'fTambahShalatKemarin': 1
+            });
+        }
         const setFlagTambah = dbRef.set({
             'fTambahShalat': 1
         }, {merge: true});
