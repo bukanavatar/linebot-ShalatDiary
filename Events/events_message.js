@@ -220,6 +220,24 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                         }).catch(err => console.log("Axios error get", err));
                                 });
                         });
+                    break;
+                case 'tambah shalat':
+                    const dbLocRef = db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get()
+                        .then(doc => {
+                            const latitude = doc.data().latitude;
+                            const longitude = doc.data().longitude;
+                            const address = doc.data().address;
+                            const API_URL = `https://time.siswadi.com/pray/?lat=${latitude}&lng=${longitude}`;
+                            axios.get(API_URL)
+                                .then(res => {
+                                    const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}&time=${timestamp}`;
+                                    axios.get(API_JAM)
+                                        .then(resp => {
+                                            const waktuSekarang = resp.data.formatted;
+
+                                        });
+                                })
+                        })
             }
         })
 
