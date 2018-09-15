@@ -275,7 +275,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                             const data = doc.data();
                             if (data.fTambahShalat && data.fTambahShalat === 1) {
                                 const setTanggal = dbRef.collection('tanggal').doc(tanggalSekarang).set({
-                                    shalatSekarang: 'jamaah'
+                                    [shalatSekarang]: 'Jamaah'
                                 }, {merge: true})
                                     .then(() => {
                                         const setFlagtoZero = dbRef.set({
