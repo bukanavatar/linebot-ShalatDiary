@@ -1,6 +1,9 @@
 import axios from 'axios';
 import moment from 'moment';
 
+let tanggalSekarang = '';
+let shalatSekarang = '';
+
 export function handleText(message, replyToken, source, timestamp, client, db) {
     const idUser = source.userId;
     return client.getProfile(idUser)
@@ -244,30 +247,60 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                     axios.get(API_JAM)
                                         .then(resp => {
                                             const waktuSekarang = moment(resp.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString();
+                                            tanggalSekarang = moment(resp.data.formatted, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD").toString();
                                             const waktuSubuh = res.data.data.Fajr;
                                             const waktuDzuhur = res.data.data.Dhuhr;
                                             const waktuAshar = res.data.data.Asr;
                                             const waktuMaghrib = res.data.data.Maghrib;
                                             const waktuIsya = res.data.data.Isha;
                                             if (waktuSekarang > waktuSubuh && waktuSekarang < waktuDzuhur) {
-                                                kirimTambahShalat("Subuh");
+                                                kirimTambahShalat("Subuh", profileId, tanggalSekarang);
                                             } else if (waktuSekarang > waktuDzuhur && waktuSekarang < waktuAshar) {
-                                                kirimTambahShalat("Dzuhur");
+                                                kirimTambahShalat("Dzuhur", profileId, tanggalSekarang);
                                             } else if (waktuSekarang > waktuAshar && waktuSekarang < waktuMaghrib) {
-                                                kirimTambahShalat("Maghrib");
+                                                kirimTambahShalat("Maghrib", profileId, tanggalSekarang);
                                             } else if (waktuSekarang > waktuIsya && waktuSekarang < "23:59") {
-                                                kirimTambahShalat("Isya")
+                                                kirimTambahShalat("Isya", profileId, tanggalSekarang)
                                             } else if (waktuSekarang > "23:59" && waktuSekarang < waktuSubuh) {
-                                                kirimTambahShalat("Isya")
+                                                kirimTambahShalat("Isya", profileId, tanggalSekarang)
                                             }
                                         }).catch(err => console.log("Ada error ambil API jam", err));
                                 }).catch(err => console.log("Ada error ketika ambil API Jadwal Shalat", err));
                         }).catch(err => console.log("Ada error ketika ambil lokasi dari database", err));
                     break;
+                case 'jamaah':
+                    const dbRef = db.collection('users').doc(profileId);
+                    const getFlag = dbRef.get()
+                        .then(doc => {
+                            const data = doc.data();
+                            if (data.fTambahShalat && data.fTambahShalat === 1) {
+                                const setTanggal = dbRef.collection('tanggal').doc(tanggalSekarang).set({
+                                    shalatSekarang: 'jamaah'
+                                }, {merge: true})
+                                    .then(() => {
+                                        const setFlagtoZero = dbRef.set({
+                                            'fTambahShalat': 0
+                                        }, {merge: true})
+                                    })
+                                    .catch(err => console.log("Ada error ketika tambahin shalat", err));
+                            }
+                        }).catch(err => console.log("Error ketika get data shalat", err));
+                    break;
+                case 'sendiri':
+                    break;
+                case 'telat':
+                    break;
+                case 'tidak shalat':
+                    break;
             }
         });
 
-    function kirimTambahShalat(waktuShalat) {
+    function kirimTambahShalat(waktuShalat, profileId) {
+        const dbRef = db.collection('users').doc(profileId);
+        shalatSekarang = waktuShalat;
+        const setFlagTambah = dbRef.set({
+            'fTambahShalat': 1
+        }, {merge: true});
         client.replyMessage(replyToken, {
             type: 'text',
             text: `Bagaimana Shalat ${waktuShalat} mu ?`
