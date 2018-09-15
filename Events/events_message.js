@@ -46,6 +46,23 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                             client.replyMessage(replyToken, {
                                                 type: "flex",
                                                 altText: "Jadwal Shalat hari ini",
+                                                quickReply: {
+                                                    items: [{
+                                                        type: "action",
+                                                        action: {
+                                                            type: "message",
+                                                            label: "Jadwal Shalat",
+                                                            text: "Jadwal Shalat"
+                                                        }
+                                                    }, {
+                                                        type: "action",
+                                                        action: {
+                                                            type: "message",
+                                                            label: "Tambah Record Shalat",
+                                                            text: "tambah shalat"
+                                                        }
+                                                    }]
+                                                },
                                                 contents: {
                                                     type: "bubble",
                                                     hero: {
@@ -280,7 +297,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                     setTambahShalat(waktuShalat[2]);
                     break;
                 case 'tidak shalat':
-                    setTambahShalat(waktuShalat[4]);
+                    setTambahShalat(waktuShalat[3]);
                     break;
             }
         });
