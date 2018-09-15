@@ -340,19 +340,43 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                 const data = doc.data();
                 if (data.fTambahShalat && data.fTambahShalat === 1) {
                     const tanggal = moment(tanggalSekarang);
-                    const setTanggal = dbRef.collection('tanggal').doc(data.fTambahShalatKemarin === 1 ? tanggal.subtract(1, 'days').format("YYYY-MM-DD").toString() : tanggal.format("YYYY-MM-DD").toString()).set({
-                        [shalatSekarang]: waktuShalatA.toString()
-                    }, {merge: true})
-                        .then(() => {
-                            const setFlagtoZero = dbRef.set({
-                                'fTambahShalat': 0
-                            }, {merge: true});
-                            client.replyMessage(replyToken, {
-                                type: 'text',
-                                text: 'Berhasil Gan'
-                            })
+                    const dbRefTanggal = dbRef.collection('tanggal').doc(data.fTambahShalatKemarin === 1 ? tanggal.subtract(1, 'days').format("YYYY-MM-DD").toString() : tanggal.format("YYYY-MM-DD").toString());
+                    const getTanggal = dbRefTanggal.get()
+                        .then(doc => {
+                            if (!doc.exists) {
+                                const setTanggal = dbRefTanggal.set({
+                                    'Subuh': 'Belum Diisi',
+                                    'Dzuhur': 'Belum Diisi',
+                                    'Ashar': 'Belum Diisi',
+                                    'Maghrib': 'Belum Diisi',
+                                    'Isya': 'Belum Diisi',
+                                }, {merge: true})
+                                    .then(() => {
+                                        const setShalat = dbRefTanggal.set({
+                                            [shalatSekarang]: waktuShalatA.toString()
+                                        }, {merge: true});
+                                        const setFlagtoZero = dbRef.set({
+                                            'fTambahShalat': 0
+                                        }, {merge: true});
+                                        client.replyMessage(replyToken, {
+                                            type: 'text',
+                                            text: 'Berhasil Gan'
+                                        })
+                                    })
+                                    .catch(err => console.log("Ada error ketika tambahin shalat", err));
+                            } else {
+                                const setShalat = dbRefTanggal.set({
+                                    [shalatSekarang]: waktuShalatA.toString()
+                                }, {merge: true});
+                                const setFlagtoZero = dbRef.set({
+                                    'fTambahShalat': 0
+                                }, {merge: true});
+                                client.replyMessage(replyToken, {
+                                    type: 'text',
+                                    text: 'Berhasil Gan'
+                                })
+                            }
                         })
-                        .catch(err => console.log("Ada error ketika tambahin shalat", err));
                 }
             }).catch(err => console.log("Error ketika get data shalat", err));
     }
