@@ -356,8 +356,8 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                             [shalatSekarang]: waktuShalatA.toString()
                                         }, {merge: true});
                                         const setFlagtoZero = dbRef.set({
-                                            'fTambahShalat': 0,
-                                            'fTambahShalatKemarin': 0,
+                                            fTambahShalat: 0,
+                                            fTambahShalatKemarin: 0,
                                         }, {merge: true});
                                         client.replyMessage(replyToken, {
                                             type: 'text',
