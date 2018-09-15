@@ -8,7 +8,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
             const profileId = profile.userId;
             switch (message.text.toLowerCase()) {
                 case 'test':
-                    const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=-6.18462&lng=106.828717&time=${timestamp}`;
+                    const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=-6.18462&lng=106.828717&time=${Math.ceil(timestamp / 1000)}`;
                     axios.get(API_JAM)
                         .then(res => {
                             client.replyMessage(replyToken, [{
