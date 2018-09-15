@@ -3,6 +3,7 @@ import moment from 'moment';
 
 let tanggalSekarang = '';
 let shalatSekarang = '';
+const waktuShalat = ['jamaah', 'sendiri', 'telat', 'tidakShalat'];
 
 export function handleText(message, replyToken, source, timestamp, client, db) {
     const idUser = source.userId;
@@ -269,32 +270,42 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                         }).catch(err => console.log("Ada error ketika ambil lokasi dari database", err));
                     break;
                 case 'jamaah':
-                    const dbRef = db.collection('users').doc(profileId);
-                    const getFlag = dbRef.get()
-                        .then(doc => {
-                            const data = doc.data();
-                            if (data.fTambahShalat && data.fTambahShalat === 1) {
-                                const setTanggal = dbRef.collection('tanggal').doc(tanggalSekarang).set({
-                                    [shalatSekarang]: 'Jamaah'
-                                }, {merge: true})
-                                    .then(() => {
-                                        const setFlagtoZero = dbRef.set({
-                                            'fTambahShalat': 0
-                                        }, {merge: true})
-                                    })
-                                    .catch(err => console.log("Ada error ketika tambahin shalat", err));
-                            }
-                        }).catch(err => console.log("Error ketika get data shalat", err));
+                    setTambahShalat(waktuShalat[0]);
                     break;
                 case 'sendiri':
+                    setTambahShalat(waktuShalat[1]);
                     break;
                 case 'telat':
+                    setTambahShalat(waktuShalat[2]);
                     break;
                 case 'tidak shalat':
+                    setTambahShalat(waktuShalat[4]);
                     break;
             }
         });
 
+    function setTambahShalat(waktuShalat) {
+        const dbRef = db.collection('users').doc(profileId);
+        const getFlag = dbRef.get()
+            .then(doc => {
+                const data = doc.data();
+                if (data.fTambahShalat && data.fTambahShalat === 1) {
+                    const setTanggal = dbRef.collection('tanggal').doc(tanggalSekarang).set({
+                        [shalatSekarang]: [waktuShalat]
+                    }, {merge: true})
+                        .then(() => {
+                            const setFlagtoZero = dbRef.set({
+                                'fTambahShalat': 0
+                            }, {merge: true});
+                            client.replyMessage(replyToken, {
+                                type: 'text',
+                                text: 'Berhasil Gan'
+                            })
+                        })
+                        .catch(err => console.log("Ada error ketika tambahin shalat", err));
+                }
+            }).catch(err => console.log("Error ketika get data shalat", err));
+    }
     function kirimTambahShalat(waktuShalat, profileId) {
         const dbRef = db.collection('users').doc(profileId);
         shalatSekarang = waktuShalat;
