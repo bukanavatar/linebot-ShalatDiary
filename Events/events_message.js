@@ -237,21 +237,42 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                         .then(doc => {
                             const latitude = doc.data().latitude;
                             const longitude = doc.data().longitude;
-                            const address = doc.data().address;
                             const API_URL = `https://time.siswadi.com/pray/?lat=${latitude}&lng=${longitude}`;
                             axios.get(API_URL)
                                 .then(res => {
-                                    const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}&time=${timestamp}`;
+                                    const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}&time=${Math.ceil(timestamp / 1000)}`;
                                     axios.get(API_JAM)
                                         .then(resp => {
-                                            const waktuSekarang = resp.data.formatted;
-
-                                        });
-                                })
-                        })
+                                            const waktuSekarang = moment(resp.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString();
+                                            const waktuSubuh = res.data.data.Fajr;
+                                            const waktuDzuhur = res.data.data.Dhuhr;
+                                            const waktuAshar = res.data.data.Asr;
+                                            const waktuMaghrib = res.data.data.Maghrib;
+                                            const waktuIsya = res.data.data.Isha;
+                                            if (waktuSekarang > waktuSubuh && waktuSekarang < waktuDzhuhur) {
+                                                kirimTambahShalat("Subuh");
+                                            } else if (waktuSekarang > waktuDzuhur && waktuSekarang < waktuAshar) {
+                                                kirimTambahShalat("Dzuhur");
+                                            } else if (waktuSekarang > waktuAshar && waktuSekarang < waktuMaghrib) {
+                                                kirimTambahShalat("Maghrib");
+                                            } else if (waktuSekarang > waktuIsya && waktuSekarang < "23:59") {
+                                                kirimTambahShalat("Isya")
+                                            } else if (waktuSekarang > "23:59" && waktuSekarang < waktuSubuh) {
+                                                kirimTambahShalat("Isya")
+                                            }
+                                        }).catch(err => console.log("Ada error ambil API jam", err));
+                                }).catch(err => console.log("Ada error ketika ambil API Jadwal Shalat", err));
+                        }).catch(err => console.log("Ada error ketika ambil lokasi dari database", err));
+                    break;
             }
-        })
+        });
 
+    function kirimTambahShalat(waktuShalat) {
+        client.replyMessage(replyToken, {
+            type: 'text',
+            text: `Bagaimana Shalat ${waktuShalat} mu ?`
+        }).catch(err => console.log("ada error ketika kirim pesan tambah shalat", err));
+    }
 }
 
 export function handleLocation(message, replyToken, source, client, db) {
