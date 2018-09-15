@@ -249,7 +249,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                             const waktuAshar = res.data.data.Asr;
                                             const waktuMaghrib = res.data.data.Maghrib;
                                             const waktuIsya = res.data.data.Isha;
-                                            if (waktuSekarang > waktuSubuh && waktuSekarang < waktuDzhuhur) {
+                                            if (waktuSekarang > waktuSubuh && waktuSekarang < waktuDzuhur) {
                                                 kirimTambahShalat("Subuh");
                                             } else if (waktuSekarang > waktuDzuhur && waktuSekarang < waktuAshar) {
                                                 kirimTambahShalat("Dzuhur");
