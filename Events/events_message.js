@@ -45,7 +45,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                             console.log(res.data);
                                             client.replyMessage(replyToken, {
                                                 type: "flex",
-                                                altText: "Flex Jadwal Shalat",
+                                                altText: "Jadwal Shalat hari ini",
                                                 contents: {
                                                     type: "bubble",
                                                     hero: {
@@ -285,14 +285,14 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
             }
         });
 
-    function setTambahShalat(waktuShalat) {
+    function setTambahShalat(waktuShalatA) {
         const dbRef = db.collection('users').doc(profileId);
         const getFlag = dbRef.get()
             .then(doc => {
                 const data = doc.data();
                 if (data.fTambahShalat && data.fTambahShalat === 1) {
                     const setTanggal = dbRef.collection('tanggal').doc(tanggalSekarang).set({
-                        [shalatSekarang]: [waktuShalat]
+                        [shalatSekarang]: waktuShalatA.toString()
                     }, {merge: true})
                         .then(() => {
                             const setFlagtoZero = dbRef.set({
@@ -314,8 +314,109 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
             'fTambahShalat': 1
         }, {merge: true});
         client.replyMessage(replyToken, {
-            type: 'text',
-            text: `Bagaimana Shalat ${waktuShalat} mu ?`
+            type: 'bubble',
+            hero: {
+                type: 'image',
+                url: 'https://images.unsplash.com/photo-1526677504211-233c8477c61b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=be357786c98899479a2fb0a9351a082a&auto=format&fit=crop&w=1050&q=80',
+                size: 'full',
+                aspectRatio: '20:13',
+                aspectMode: 'cover'
+            },
+            body: {
+                type: 'box',
+                layout: 'vertical',
+                spacing: 'md',
+                action: {
+                    type: 'uri',
+                    uri: 'https://linecorp.com'
+                },
+                contents: [
+                    {
+                        type: 'text',
+                        text: `Bagaimana Shalat ${waktuShalat} mu?`,
+                        wrap: true,
+                        size: 'md',
+                        align: 'start',
+                        weight: 'bold'
+                    },
+                    {
+                        type: 'text',
+                        text: 'Silhakan pilih sesuai status shalat kamu',
+                        wrap: true,
+                        color: '#aaaaaa',
+                        size: 'xs'
+                    }
+                ]
+            },
+            footer: {
+                type: 'box',
+                layout: 'vertical',
+                spacing: 'sm',
+                contents: [
+                    {
+                        type: 'box',
+                        layout: 'horizontal',
+                        spacing: 'sm',
+                        contents: [
+                            {
+                                type: 'button',
+                                style: 'primary',
+                                height: 'sm',
+                                color: '#2ed573',
+                                flex: 3,
+                                action: {
+                                    type: 'message',
+                                    label: 'Jamaah',
+                                    text: 'jamaah'
+                                }
+                            },
+                            {
+                                type: 'button',
+                                style: 'primary',
+                                height: 'sm',
+                                color: '#ffa502',
+                                flex: 3,
+                                action: {
+                                    type: 'message',
+                                    label: 'Sendiri',
+                                    text: 'sendiri'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'box',
+                        layout: 'horizontal',
+                        spacing: 'sm',
+                        contents: [
+                            {
+                                type: 'button',
+                                style: 'primary',
+                                height: 'sm',
+                                color: '#1e90ff',
+                                flex: 3,
+                                action: {
+                                    type: 'message',
+                                    label: 'Telat',
+                                    text: 'telat'
+                                }
+                            },
+                            {
+                                type: 'button',
+                                style: 'primary',
+                                height: 'sm',
+                                color: '#ff4757',
+                                flex: 3,
+                                action: {
+                                    type: 'message',
+                                    label: 'Tidak Shalat',
+                                    text: 'tidak shalat'
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
         }).catch(err => console.log("ada error ketika kirim pesan tambah shalat", err));
     }
 }
@@ -366,7 +467,7 @@ export function handleLocation(message, replyToken, source, client, db) {
                         }, {merge: true}).then(() => {
                             client.replyMessage(replyToken, {
                                 type: 'text',
-                                text: `Lokasi kamu sudah diupdate, sekarang kamu berada di ${message.address.toString()}`,
+                                text: `Lokasi kamu sudah diperbarui, sekarang kamu berada di ${message.address.toString()}`,
                                 quickReply: {
                                     items: [{
                                         type: "action",
