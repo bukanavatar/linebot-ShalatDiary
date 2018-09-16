@@ -16,7 +16,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                     const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=-6.18462&lng=106.828717&time=${Math.ceil(timestamp / 1000)}`;
                     axios.get(API_JAM)
                         .then(res => {
-                            client.replyMessage(replyToken, [{
+                            client.replyMessage(replyToken, {
                                 type: 'template',
                                 altText: 'Dialy Stats',
                                 template: {
@@ -31,7 +31,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                         }
                                     ],
                                 },
-                            }]).catch(err => console.log("Ada error liff", err));
+                            }).catch(err => console.log("Ada error liff", err));
                         }).catch(err => console.log("Ada error API jam", err));
                     break;
                 case 'jadwal shalat':
