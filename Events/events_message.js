@@ -17,14 +17,20 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                     axios.get(API_JAM)
                         .then(res => {
                             client.replyMessage(replyToken, [{
-                                type: 'text',
-                                text: moment(res.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString()
-                            }, {
-                                type: 'text',
-                                text: res.data.formatted.toString()
-                            }, {
-                                type: 'text',
-                                text: timestamp.toString()
+                                type: 'template',
+                                altText: 'Dialy Stats',
+                                template: {
+                                    type: 'buttons',
+                                    thumbnailImageUrl: 'https://images.unsplash.com/photo-1533615767566-273ffe95ed17?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=030e680a09fbe23f188b56248a6e30e6&auto=format&fit=crop&w=1027&q=80',
+                                    title: 'Dialy Stats Shalatmu',
+                                    actions: [
+                                        {
+                                            label: 'Buka',
+                                            type: 'uri',
+                                            uri: 'line://app/1507502538-5jaYajMN'
+                                        }
+                                    ],
+                                },
                             }]);
                         });
                     break;
