@@ -27,7 +27,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                         {
                                             label: 'Buka',
                                             type: 'uri',
-                                            uri: 'line://app/1507502538-5jaYajMN'
+                                            uri: `line://app/1507502538-5jaYajMN/stats/U5b8038d4acf2c3c808e89bd8fe75f281/2018-09-16`
                                         }
                                     ],
                                 },
