@@ -243,8 +243,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                                                 action: {
                                                                     type: "postback",
                                                                     label: "Ganti Lokasi",
-                                                                    data: "changeLocation",
-                                                                    text: "Ganti Lokasi"
+                                                                    data: "changeLocation"
                                                                 }
                                                             },
                                                             {
