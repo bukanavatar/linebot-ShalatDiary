@@ -348,6 +348,10 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                     const dbRefTanggal = dbRef.collection('tanggal').doc(data.fTambahShalatKemarin === 1 ? tanggal.subtract(1, 'days').format("YYYY-MM-DD").toString() : tanggal.format("YYYY-MM-DD").toString());
                     const getTanggal = dbRefTanggal.get()
                         .then(doc => {
+                            const objectShalat = {
+                                'status': waktuShalatA,
+                                'value': value
+                            };
                             if (!doc.exists) {
                                 const objectBelum = {
                                     'status': 'Belum Diisi',
@@ -361,11 +365,8 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                     'Isya': objectBelum,
                                 }, {merge: true})
                                     .then(() => {
-                                        const objectShalat = {
-                                            'status': waktuShalatA,
-                                            'value': value
-                                        };
                                         const setShalat = dbRefTanggal.set({
+                                            //Inget Ang ini ada 2 dibawah juga habis else
                                             [shalatSekarang]: objectShalat
                                         }, {merge: true});
                                         const setFlagtoZero = dbRef.set({
@@ -380,7 +381,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                     .catch(err => console.log("Ada error ketika tambahin shalat", err));
                             } else {
                                 const setShalat = dbRefTanggal.set({
-                                    [shalatSekarang]: waktuShalatA.toString()
+                                    [shalatSekarang]: objectShalat
                                 }, {merge: true});
                                 const setFlagtoZero = dbRef.set({
                                     'fTambahShalat': 0,
