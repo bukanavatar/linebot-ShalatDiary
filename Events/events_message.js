@@ -31,8 +31,8 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                         }
                                     ],
                                 },
-                            }]);
-                        });
+                            }]).catch(err => console.log("Ada error liff", err));
+                        }).catch(err => console.log("Ada error API jam", err));
                     break;
                 case 'jadwal shalat':
                     const dbRefLoc = db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get()
