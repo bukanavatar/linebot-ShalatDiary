@@ -362,7 +362,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                                 }, {merge: true})
                                     .then(() => {
                                         const objectShalat = {
-                                            'status': waktuShalatA.toString(),
+                                            'status': waktuShalatA,
                                             'value': value
                                         };
                                         const setShalat = dbRefTanggal.set({
