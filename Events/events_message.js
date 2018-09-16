@@ -296,16 +296,16 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                         }).catch(err => console.log("Ada error ketika ambil lokasi dari database", err));
                     break;
                 case 'jamaah':
-                    setTambahShalat(waktuShalat[0]);
+                    setTambahShalat(waktuShalat[0], 80);
                     break;
                 case 'sendiri':
-                    setTambahShalat(waktuShalat[1]);
+                    setTambahShalat(waktuShalat[1], 60);
                     break;
                 case 'telat':
-                    setTambahShalat(waktuShalat[2]);
+                    setTambahShalat(waktuShalat[2], 40);
                     break;
                 case 'tidak shalat':
-                    setTambahShalat(waktuShalat[3]);
+                    setTambahShalat(waktuShalat[3], 20);
                     break;
                 default:
                     client.replyMessage(replyToken, {
@@ -339,7 +339,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
             }
         });
 
-    function setTambahShalat(waktuShalatA) {
+    function setTambahShalat(waktuShalatA, value) {
         const dbRef = db.collection('users').doc(profileId);
         const getFlag = dbRef.get()
             .then(doc => {
@@ -350,16 +350,24 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                     const getTanggal = dbRefTanggal.get()
                         .then(doc => {
                             if (!doc.exists) {
+                                const objectBelum = {
+                                    'status': 'Belum Diisi',
+                                    'value': 0
+                                };
                                 const setTanggal = dbRefTanggal.set({
-                                    'Subuh': 'Belum Diisi',
-                                    'Dzuhur': 'Belum Diisi',
-                                    'Ashar': 'Belum Diisi',
-                                    'Maghrib': 'Belum Diisi',
-                                    'Isya': 'Belum Diisi',
+                                    'Subuh': objectBelum,
+                                    'Dzuhur': objectBelum,
+                                    'Ashar': objectBelum,
+                                    'Maghrib': objectBelum,
+                                    'Isya': objectBelum,
                                 }, {merge: true})
                                     .then(() => {
+                                        const objectShalat = {
+                                            'status': waktuShalatA.toString(),
+                                            'value': value
+                                        };
                                         const setShalat = dbRefTanggal.set({
-                                            [shalatSekarang]: waktuShalatA.toString()
+                                            [shalatSekarang]: objectShalat
                                         }, {merge: true});
                                         const setFlagtoZero = dbRef.set({
                                             fTambahShalat: 0,
