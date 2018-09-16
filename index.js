@@ -3,12 +3,10 @@ import https from 'https';
 import fs from 'fs';
 import express from 'express';
 import {Client, middleware} from '@line/bot-sdk';
-import firebase from 'firebase';
+import firebase from './Firebase';
 //Events
 import {follow} from './Events/events_follow';
 import {handleLocation, handleText} from './Events/events_message';
-import admin from "firebase-admin";
-import serviceAccount from "./shalat-diary-b25ad401ff6c";
 import {handlePostback} from "./Events/events_postback";
 
 const app = express();
@@ -21,19 +19,7 @@ const config = {
 };
 const client = new Client(config);
 
-const configFirebase = {
-    apiKey: "AIzaSyCAveXkK3a66orD-6ouTnj7S_FPIS6yQ-I"
-};
-
-if (!firebase.apps.length) {
-    firebase.initializeApp(configFirebase);
-}
-if (!admin.apps.length) {
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount)
-    });
-}
-const db = admin.firestore();
+const db = firebase.firestore();
 app.post('/callback', middleware(config), (req, res) => {
     res.writeHead(200);
     Promise
