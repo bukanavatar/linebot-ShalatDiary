@@ -346,7 +346,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
         const dbRef = db.collection('users').doc(profileId);
         try {
             const dbSnapshot = await dbRef.get();
-            console.log("1");
+            console.log(dbSnapshot.data());
             const data = dbSnapshot.data();
             //Only Executed if Flag
             if (data.fTambahShalat && data.dTambahShalat === 1) {
