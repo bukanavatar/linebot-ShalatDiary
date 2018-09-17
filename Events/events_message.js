@@ -346,7 +346,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
         const dbRef = db.collection('users').doc(profileId);
         try {
             const dbSnapshot = await dbRef.get();
-
+            console.log("1");
             const data = dbSnapshot.data();
             //Only Executed if Flag
             if (data.fTambahShalat && data.dTambahShalat === 1) {
@@ -354,6 +354,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                 const dbRefTanggal = dbRef.collection('tanggal').doc(data.fTambahShalatKemarin === 1 ? tanggal.subtract(1, 'days').format("YYYY-MM-DD").toString() : tanggal.format("YYYY-MM-DD").toString());
 
                 const getTanggal = await dbRefTanggal.get();
+                console.log("2");
                 const objectShalat = {
                     'status': waktuShalatA,
                     'value': value
@@ -370,6 +371,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                         'Maghrib': objectBelum,
                         'Isya': objectBelum,
                     }, {merge: true});
+                    console.log("3");
                     //Set Shalat
                     await dbRefTanggal.set({
                         //Inget Ang ini ada 2 dibawah juga habis else
@@ -380,6 +382,7 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                         fTambahShalat: 0,
                         fTambahShalatKemarin: 0,
                     }, {merge: true});
+                    console.log("4");
                     //Send reply message
                     await client.replyMessage(replyToken, {
                         type: 'text',
@@ -389,10 +392,12 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
                     await dbRefTanggal.set({
                         [shalatSekarang]: objectShalat
                     }, {merge: true});
+                    console.log("5");
                     await dbRef.set({
                         'fTambahShalat': 0,
                         'fTambahShalatKemarin': 0,
                     }, {merge: true});
+                    console.log("6");
                     await client.replyMessage(replyToken, {
                         type: 'text',
                         text: 'Berhasil Gan'
