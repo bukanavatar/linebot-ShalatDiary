@@ -349,7 +349,8 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
             console.log(dbSnapshot.data());
             const data = dbSnapshot.data();
             //Only Executed if Flag
-            if (data.fTambahShalat && data.dTambahShalat === 1) {
+            if (data.fTambahShalat && data.fTambahShalat === 1) {
+                console.log("2");
                 const tanggal = moment(tanggalSekarang);
                 const dbRefTanggal = dbRef.collection('tanggal').doc(data.fTambahShalatKemarin === 1 ? tanggal.subtract(1, 'days').format("YYYY-MM-DD").toString() : tanggal.format("YYYY-MM-DD").toString());
 
