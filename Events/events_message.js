@@ -6,6 +6,10 @@ let shalatSekarang = '';
 const waktuShalat = ['Jamaah', 'Sendiri', 'Telat', 'Tidak Shalat'];
 let profileId = '';
 
+async function handleTextAsync(message, replyToken, source, timestamp, client, db) {
+    const idUser = source.userId;
+
+}
 export function handleText(message, replyToken, source, timestamp, client, db) {
     const idUser = source.userId;
     return client.getProfile(idUser)
@@ -338,63 +342,66 @@ export function handleText(message, replyToken, source, timestamp, client, db) {
             }
         });
 
-    function setTambahShalat(waktuShalatA, value) {
+    async function setTambahShalat(waktuShalatA, value) {
         const dbRef = db.collection('users').doc(profileId);
-        const getFlag = dbRef.get()
-            .then(doc => {
-                const data = doc.data();
-                if (data.fTambahShalat && data.fTambahShalat === 1) {
-                    const tanggal = moment(tanggalSekarang);
-                    const dbRefTanggal = dbRef.collection('tanggal').doc(data.fTambahShalatKemarin === 1 ? tanggal.subtract(1, 'days').format("YYYY-MM-DD").toString() : tanggal.format("YYYY-MM-DD").toString());
-                    const getTanggal = dbRefTanggal.get()
-                        .then(doc => {
-                            const objectShalat = {
-                                'status': waktuShalatA,
-                                'value': value
-                            };
-                            if (!doc.exists) {
-                                const objectBelum = {
-                                    'status': 'Belum Diisi',
-                                    'value': 0
-                                };
-                                const setTanggal = dbRefTanggal.set({
-                                    'Subuh': objectBelum,
-                                    'Dzuhur': objectBelum,
-                                    'Ashar': objectBelum,
-                                    'Maghrib': objectBelum,
-                                    'Isya': objectBelum,
-                                }, {merge: true})
-                                    .then(() => {
-                                        const setShalat = dbRefTanggal.set({
-                                            //Inget Ang ini ada 2 dibawah juga habis else
-                                            [shalatSekarang]: objectShalat
-                                        }, {merge: true});
-                                        const setFlagtoZero = dbRef.set({
-                                            fTambahShalat: 0,
-                                            fTambahShalatKemarin: 0,
-                                        }, {merge: true});
-                                        client.replyMessage(replyToken, {
-                                            type: 'text',
-                                            text: 'Berhasil Gan'
-                                        })
-                                    })
-                                    .catch(err => console.log("Ada error ketika tambahin shalat", err));
-                            } else {
-                                const setShalat = dbRefTanggal.set({
-                                    [shalatSekarang]: objectShalat
-                                }, {merge: true});
-                                const setFlagtoZero = dbRef.set({
-                                    'fTambahShalat': 0,
-                                    fTambahShalatKemarin: 0,
-                                }, {merge: true});
-                                client.replyMessage(replyToken, {
-                                    type: 'text',
-                                    text: 'Berhasil Gan'
-                                })
-                            }
-                        })
+        try {
+            const dbSnapshot = await dbRef.get();
+
+            const data = dbSnapshot.data();
+            //Only Executed if Flag
+            if (data.fTambahShalat && data.dTambahShalat === 1) {
+                const tanggal = moment(tanggalSekarang);
+                const dbRefTanggal = dbRef.collection('tanggal').doc(data.fTambahShalatKemarin === 1 ? tanggal.subtract(1, 'days').format("YYYY-MM-DD").toString() : tanggal.format("YYYY-MM-DD").toString());
+
+                const getTanggal = await dbRefTanggal.get();
+                const objectShalat = {
+                    'status': waktuShalatA,
+                    'value': value
+                };
+                if (!getTanggal.exists) {
+                    const objectBelum = {
+                        'status': 'Belum Diisi',
+                        'value': 0
+                    };
+                    await dbRefTanggal.set({
+                        'Subuh': objectBelum,
+                        'Dzuhur': objectBelum,
+                        'Ashar': objectBelum,
+                        'Maghrib': objectBelum,
+                        'Isya': objectBelum,
+                    }, {merge: true});
+                    //Set Shalat
+                    await dbRefTanggal.set({
+                        //Inget Ang ini ada 2 dibawah juga habis else
+                        [shalatSekarang]: objectShalat
+                    }, {merge: true});
+                    //Set Flag
+                    await dbRef.set({
+                        fTambahShalat: 0,
+                        fTambahShalatKemarin: 0,
+                    }, {merge: true});
+                    //Send reply message
+                    await client.replyMessage(replyToken, {
+                        type: 'text',
+                        text: 'Berhasil Gan'
+                    })
+                } else {
+                    await dbRefTanggal.set({
+                        [shalatSekarang]: objectShalat
+                    }, {merge: true});
+                    await dbRef.set({
+                        'fTambahShalat': 0,
+                        'fTambahShalatKemarin': 0,
+                    }, {merge: true});
+                    await client.replyMessage(replyToken, {
+                        type: 'text',
+                        text: 'Berhasil Gan'
+                    });
                 }
-            }).catch(err => console.log("Error ketika get data shalat", err));
+            }
+        } catch (e) {
+            console.log("Error", e);
+        }
     }
 
     function kirimTambahShalat(waktuShalat, profileId, waktuKemarin) {
