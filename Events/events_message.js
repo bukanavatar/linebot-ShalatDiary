@@ -11,28 +11,22 @@ let shalatSekarang = '';
 const waktuShalat = ['Jamaah', 'Sendiri', 'Telat', 'Tidak Shalat'];
 let profileId = '';
 
-async function handleTextAsync(message, replyToken, source, timestamp, client, db) {
-    const idUser = source.userId;
-
-}
-
 export async function handleText(message, replyToken, source, timestamp, client, db) {
     try {
         const idUser = source.userId;
         let profile = await client.getProfile(idUser);
         profileId = profile.userId;
-        const dbRef = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
-        const latitude = dbRef.data().latitude;
-        const longitude = dbRef.data().longitude;
-        const API_URL = `https://time.siswadi.com/pray/?lat=${latitude}&lng=${longitude}`;
-        let respJadwalShalat = await axios.get(API_URL);
-
         switch (message.text.toLowerCase()) {
             case  'jadwal shalat':
                 //1 - Get Lokasi Awal
+                const dbRef = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
+                const latitude = dbRef.data().latitude;
+                const longitude = dbRef.data().longitude;
                 const address = dbRef.data().address;
                 const API_UNSPLASH = 'https://api.unsplash.com/photos/random?page=1&query=mosque&orientation=landscape&client_id=8927155d86c8a4f2f7ddc93bf355113f0a9f52e96e945d873456023e60c4ca20';
                 let imageMosque = '';
+                const API_URL = `https://time.siswadi.com/pray/?lat=${latitude}&lng=${longitude}`;
+                let respJadwalShalat = await axios.get(API_URL);
                 //2 - Get Random Image
                 let respUnsplash = await axios.get(API_UNSPLASH);
                 imageMosque = respUnsplash.data.urls.regular;
@@ -40,7 +34,10 @@ export async function handleText(message, replyToken, source, timestamp, client,
                 await client.replyMessage(replyToken, flex_jadwalShalat(imageMosque, address, respJadwalShalat));
                 break;
             case 'tambah shalat':
-                const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}&time=${Math.ceil(timestamp / 1000)}`;
+                const dbRefTambah = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
+                const lat = dbRefTambah.data().latitude;
+                const long = dbRefTambah.data().longitude;
+                const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${lat}&lng=${long}&time=${Math.ceil(timestamp / 1000)}`;
                 let respWaktuSekarang = await axios.get(API_JAM);
                 const waktuSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString();
                 tanggalSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD").toString();

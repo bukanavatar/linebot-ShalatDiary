@@ -1,26 +1,25 @@
-export function follow(replyToken, source, client, db) {
+export async function follow(replyToken, source, client, db) {
     const idUser = source.userId;
-
     if (idUser) {
-        return client.getProfile(idUser)
-            .then(profile => {
-                const getDoc = db.collection('users').doc(profile.userId).get()
-                    .then(doc => {
-                        if (!doc.exists) {
-                            console.log('User Not Exist');
-                            const dbRef = db.collection('users').doc(profile.userId);
-                            const setUser = dbRef.set({
-                                'uid': profile.userId,
-                                'displayName': profile.displayName,
-                                'fLocationAwal': 1
-                            });
-                            callReplyMessage(profile, true);
-                        } else {
-                            console.log('User is Exist');
-                            callReplyMessage(profile, false)
-                        }
-                    }).catch(err => console.log(err));
-            }).catch(err => console.log("Error getting document:", err));
+        try {
+            const profile = await client.getProfile(idUser);
+            const getDoc = await db.collection('users').doc(profile.userId).get();
+            if (!getDoc.exists) {
+                console.log("User Not Exist");
+                const dbRef = await db.collection('users').doc(profile.userId);
+                const setUser = dbRef.set({
+                    'uid': profile.userId,
+                    'displayName': profile.displayName,
+                    'fLocationAwal': 1
+                });
+                callReplyMessage(profile, true);
+            } else {
+                console.log('User is Exist');
+                callReplyMessage(profile, false)
+            }
+        } catch (e) {
+            console.log("Ada error here", e);
+        }
     } else {
         return client.replyMessage(replyToken, `Bot can't use profile API without user ID`);
     }
