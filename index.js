@@ -20,17 +20,19 @@ const config = {
     channelSecret: CHANNEL_SECRET,
 };
 const client = new Client(config);
-
 const db = firebase.firestore();
+const twiml = new VoiceResponse();
 
 app.post('/record', (req, res) => {
-    const twiml = new VoiceResponse();
     twiml.say('Wokay');
-
     res.type('text/xml');
     res.send(twiml.toString());
 });
-
+app.post('/callshalat', (req, res) => {
+    twiml.play('https://firebasestorage.googleapis.com/v0/b/shalatdiary.appspot.com/o/audio%2FadzanSubuh.mp3?alt=media&token=9506dde7-e757-48cc-84ac-8d47a618fc25');
+    res.type('text/xml');
+    res.send(twiml.toString());
+});
 app.post('/callback', middleware(config), (req, res) => {
     res.writeHead(200);
     Promise
