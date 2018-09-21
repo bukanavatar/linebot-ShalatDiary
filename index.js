@@ -32,10 +32,10 @@ app.get('/api/callme', (req, res) => {
     client.calls
         .create({
             url: `${BASE_URL}/callshalat`,
-            to: '+6282239473609',
-            from: '+12408001822'
+            from: '+12408001822',
+            to: '+6282199492326'
         })
-        .then(call => console.log(call.sid))
+        .then(call => res.send(call.sid))
         .then(res.send("Masuk Pak Eko"))
         .done();
 });
