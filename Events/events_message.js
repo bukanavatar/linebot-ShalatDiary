@@ -43,26 +43,18 @@ export async function handleText(message, replyToken, source, timestamp, client,
                 dbRef = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
                 latitude = dbRef.data().latitude;
                 longitude = dbRef.data().longitude;
-                console.log("1");
                 const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}&time=${Math.ceil(timestamp / 1000)}`;
-                console.log(latitude, longitude);
                 let respWaktuSekarang = await axios.get(API_JAM);
-                console.log(respWaktuSekarang);
-                console.log("2");
                 const waktuSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString();
                 bulanSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("M").toString();
                 tanggalSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD").toString();
                 API_URL = `http://api.aladhan.com/v1/calendar?latitude=${latitude}&longitude=${longitude}&method=2`;
-                console.log("3");
                 respJadwalShalat = await axios.get(API_URL);
-                console.log(respJadwalShalat);
-                console.log("4");
                 const waktuSubuh = respJadwalShalat.data.data[parseInt(bulanSekarang) - 1].timings.Fajr.substring(0, 6);
                 const waktuDzuhur = respJadwalShalat.data.data[parseInt(bulanSekarang) - 1].timings.Dhuhr.substring(0, 6);
                 const waktuAshar = respJadwalShalat.data.data[parseInt(bulanSekarang) - 1].timings.Asr.substring(0, 6);
                 const waktuMaghrib = respJadwalShalat.data.data[parseInt(bulanSekarang) - 1].timings.Maghrib.substring(0, 6);
                 const waktuIsya = respJadwalShalat.data.data[parseInt(bulanSekarang) - 1].timings.Isha.substring(0, 6);
-                console.log("6");
                 if (waktuSekarang > waktuSubuh && waktuSekarang < waktuDzuhur) {
                     await kirimTambahShalat("Subuh", profileId, false);
                 } else if (waktuSekarang > waktuDzuhur && waktuSekarang < waktuAshar) {
@@ -104,13 +96,11 @@ export async function handleText(message, replyToken, source, timestamp, client,
             const data = dbSnapshot.data();
             //Only Executed if Flag
             if (data.fTambahShalat && data.fTambahShalat === 1) {
-                console.log("2");
                 const tanggal = moment(tanggalSekarang);
                 const dbRefTanggal = dbRef.collection('tanggal')
                     .doc(data.fTambahShalatKemarin === 1 ? tanggal.subtract(1, 'days').format("YYYY-MM-DD").toString() : tanggal.format("YYYY-MM-DD").toString());
 
                 const getTanggal = await dbRefTanggal.get();
-                console.log("2");
                 const objectShalat = {
                     'status': waktuShalatA,
                     'value': value
@@ -127,7 +117,6 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         'Maghrib': objectBelum,
                         'Isya': objectBelum,
                     }, {merge: true});
-                    console.log("3");
                     //Set Shalat
                     await dbRefTanggal.set({
                         //Inget Ang ini ada 2 dibawah juga habis else
@@ -138,7 +127,6 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         fTambahShalat: 0,
                         fTambahShalatKemarin: 0,
                     }, {merge: true});
-                    console.log("4");
                     //Send reply message
                     await client.replyMessage(replyToken, {
                         type: 'text',
@@ -148,12 +136,10 @@ export async function handleText(message, replyToken, source, timestamp, client,
                     await dbRefTanggal.set({
                         [shalatSekarang]: objectShalat
                     }, {merge: true});
-                    console.log("5");
                     await dbRef.set({
                         'fTambahShalat': 0,
                         'fTambahShalatKemarin': 0,
                     }, {merge: true});
-                    console.log("6");
                     await client.replyMessage(replyToken, {
                         type: 'text',
                         text: 'Berhasil Gan'
