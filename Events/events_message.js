@@ -50,7 +50,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
                 console.log(respWaktuSekarang);
                 console.log("2");
                 const waktuSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString();
-                bulanSekarang = moment(respWaktuSekarangA.data.formatted, "YYYY-MM-DD HH:mm:ss").format("M").toString();
+                bulanSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("M").toString();
                 tanggalSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD").toString();
                 API_URL = `http://api.aladhan.com/v1/calendar?latitude=${latitude}&longitude=${longitude}&method=2`;
                 console.log("3");
