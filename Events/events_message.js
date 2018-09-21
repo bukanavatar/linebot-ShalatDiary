@@ -27,13 +27,18 @@ export async function handleText(message, replyToken, source, timestamp, client,
                 const address = dbRef.data().address;
                 const API_UNSPLASH = 'https://api.unsplash.com/photos/random?page=1&query=mosque&orientation=landscape&client_id=8927155d86c8a4f2f7ddc93bf355113f0a9f52e96e945d873456023e60c4ca20';
                 let imageMosque = '';
-                API_URL = `https://time.siswadi.com/pray/?lat=${latitude}&lng=${longitude}`;
+                //http://api.aladhan.com/v1/calendar?latitude=51.508515&longitude=-0.1254872&method=2&month=4&year=2017
+                API_URL = `http://api.aladhan.com/v1/calendar?latitude=${latitude}&longitude=${longitude}&method=2`;
                 respJadwalShalat = await axios.get(API_URL);
                 //2 - Get Random Image
                 let respUnsplash = await axios.get(API_UNSPLASH);
+                const API_TIME = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}&time=${Math.ceil(timestamp / 1000)}`;
+                let respWaktuSekarangA = await axios.get(API_TIME);
+                const todayMonth = moment(respWaktuSekarangA.data.formatted, "YYYY-MM-DD HH:mm:ss").format("M").toString();
                 imageMosque = respUnsplash.data.urls.regular;
                 //4 - Send Reply Message
-                await client.replyMessage(replyToken, flex_jadwalShalat(imageMosque, address, respJadwalShalat));
+                let todayPrayer = respJadwalShalat.data.data[parseInt(todayMonth) - 1];
+                await client.replyMessage(replyToken, flex_jadwalShalat(imageMosque, address, todayPrayer));
                 break;
             case 'tambah shalat':
                 const dbRefTambah = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();

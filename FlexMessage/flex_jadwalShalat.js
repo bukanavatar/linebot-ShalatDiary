@@ -72,7 +72,7 @@ export default function (imageMosque, address, res) {
 
                                     {
                                         type: "text",
-                                        text: `${res.data.data.Fajr}`,
+                                        text: `${res.timings.Fajr.substring(0, 6)}`,
                                         wrap: true,
                                         align: "end",
                                         color: "#666666",
@@ -96,7 +96,7 @@ export default function (imageMosque, address, res) {
 
                                     {
                                         type: "text",
-                                        text: `${res.data.data.Dhuhr}`,
+                                        text: `${res.timings.Dhuhr.substring(0, 6)}`,
                                         wrap: true,
                                         align: "end",
                                         color: "#666666",
@@ -120,7 +120,7 @@ export default function (imageMosque, address, res) {
 
                                     {
                                         type: "text",
-                                        text: `${res.data.data.Asr}`,
+                                        text: `${res.timings.Asr.substring(0, 6)}`,
                                         wrap: true,
                                         align: "end",
                                         color: "#666666",
@@ -144,7 +144,7 @@ export default function (imageMosque, address, res) {
 
                                     {
                                         type: "text",
-                                        text: `${res.data.data.Maghrib}`,
+                                        text: `${res.timings.Maghrib.substring(0, 6)}`,
                                         wrap: true,
                                         align: "end",
                                         color: "#666666",
@@ -168,7 +168,7 @@ export default function (imageMosque, address, res) {
 
                                     {
                                         type: "text",
-                                        text: `${res.data.data.Isha}`,
+                                        text: `${res.timings.Isha.substring(0, 6)}`,
                                         wrap: true,
                                         align: "end",
                                         color: "#666666",
