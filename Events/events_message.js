@@ -47,7 +47,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
                 console.log(latitude, longitude);
                 let respWaktuSekarang = await axios.get(API_JAM);
                 console.log(respWaktuSekarang);
-                API_URL = `http://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${long}&method=2`;
+                API_URL = `http://api.aladhan.com/v1/calendar?latitude=${latitude}&longitude=${longitude}&method=2`;
                 respJadwalShalat = await axios.get(API_URL);
                 const waktuSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString();
                 bulanSekarang = moment(respWaktuSekarangA.data.formatted, "YYYY-MM-DD HH:mm:ss").format("M").toString();
