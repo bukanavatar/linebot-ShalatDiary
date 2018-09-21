@@ -1,4 +1,4 @@
-//Regular Events
+//Regular Imports
 import https from 'https';
 import fs from 'fs';
 import express from 'express';
@@ -8,6 +8,8 @@ import firebase from './Firebase';
 import {follow} from './Events/events_follow';
 import {handleLocation, handleText} from './Events/events_message';
 import {handlePostback} from "./Events/events_postback";
+
+const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
 const app = express();
 
@@ -20,6 +22,15 @@ const config = {
 const client = new Client(config);
 
 const db = firebase.firestore();
+
+app.post('/record', (req, res) => {
+    const twiml = new VoiceResponse();
+    twiml.say('Wokay');
+
+    res.type('text/xml');
+    res.send(twiml.toString());
+});
+
 app.post('/callback', middleware(config), (req, res) => {
     res.writeHead(200);
     Promise
