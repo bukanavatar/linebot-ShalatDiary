@@ -16,14 +16,13 @@ export async function handleText(message, replyToken, source, timestamp, client,
         const idUser = source.userId;
         let profile = await client.getProfile(idUser);
         profileId = profile.userId;
-        let API_URL = '';
-        let respJadwalShalat;
+        let API_URL, respJadwalShalat, bulanSekarang, dbRef, latitude, longitude;
         switch (message.text.toLowerCase()) {
             case  'jadwal shalat':
                 //1 - Get Lokasi Awal
-                const dbRef = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
-                const latitude = dbRef.data().latitude;
-                const longitude = dbRef.data().longitude;
+                dbRef = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
+                latitude = dbRef.data().latitude;
+                longitude = dbRef.data().longitude;
                 const address = dbRef.data().address;
                 const API_UNSPLASH = 'https://api.unsplash.com/photos/random?page=1&query=mosque&orientation=landscape&client_id=8927155d86c8a4f2f7ddc93bf355113f0a9f52e96e945d873456023e60c4ca20';
                 let imageMosque = '';
@@ -34,30 +33,31 @@ export async function handleText(message, replyToken, source, timestamp, client,
                 let respUnsplash = await axios.get(API_UNSPLASH);
                 const API_TIME = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}&time=${Math.ceil(timestamp / 1000)}`;
                 let respWaktuSekarangA = await axios.get(API_TIME);
-                const todayMonth = moment(respWaktuSekarangA.data.formatted, "YYYY-MM-DD HH:mm:ss").format("M").toString();
+                bulanSekarang = moment(respWaktuSekarangA.data.formatted, "YYYY-MM-DD HH:mm:ss").format("M").toString();
                 imageMosque = respUnsplash.data.urls.regular;
                 //4 - Send Reply Message
-                let todayPrayer = respJadwalShalat.data.data[parseInt(todayMonth) - 1];
+                let todayPrayer = respJadwalShalat.data.data[parseInt(bulanSekarang) - 1];
                 await client.replyMessage(replyToken, flex_jadwalShalat(imageMosque, address, todayPrayer));
                 break;
             case 'tambah shalat':
-                const dbRefTambah = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
-                const lat = dbRefTambah.data().latitude;
-                const long = dbRefTambah.data().longitude;
-                const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${lat}&lng=${long}&time=${Math.ceil(timestamp / 1000)}`;
-                console.log(lat, long);
+                dbRef = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
+                latitude = dbRef.data().latitude;
+                longitude = dbRef.data().longitude;
+                const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}&time=${Math.ceil(timestamp / 1000)}`;
+                console.log(latitude, longitude);
                 let respWaktuSekarang = await axios.get(API_JAM);
                 console.log(respWaktuSekarang);
-                API_URL = `https://time.siswadi.com/pray/?lat=${lat}&lng=${long}`;
+                API_URL = `http://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${long}&method=2`;
                 respJadwalShalat = await axios.get(API_URL);
                 const waktuSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString();
+                bulanSekarang = moment(respWaktuSekarangA.data.formatted, "YYYY-MM-DD HH:mm:ss").format("M").toString();
                 tanggalSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD").toString();
                 console.log(respJadwalShalat);
-                const waktuSubuh = respJadwalShalat.data.data.Fajr;
-                const waktuDzuhur = respJadwalShalat.data.data.Dhuhr;
-                const waktuAshar = respJadwalShalat.data.data.Asr;
-                const waktuMaghrib = respJadwalShalat.data.data.Maghrib;
-                const waktuIsya = respJadwalShalat.data.data.Isha;
+                const waktuSubuh = respJadwalShalat.data.data[parseInt(bulanSekarang) - 1].timings.Fajr.substring(0, 6);
+                const waktuDzuhur = respJadwalShalat.data.data[parseInt(bulanSekarang) - 1].timings.Dhuhr.substring(0, 6);
+                const waktuAshar = respJadwalShalat.data.data[parseInt(bulanSekarang) - 1].timings.Asr.substring(0, 6);
+                const waktuMaghrib = respJadwalShalat.data.data[parseInt(bulanSekarang) - 1].timings.Maghrib.substring(0, 6);
+                const waktuIsya = respJadwalShalat.data.data[parseInt(bulanSekarang) - 1].timings.Isha.substring(0, 6);
                 if (waktuSekarang > waktuSubuh && waktuSekarang < waktuDzuhur) {
                     await kirimTambahShalat("Subuh", profileId, false);
                 } else if (waktuSekarang > waktuDzuhur && waktuSekarang < waktuAshar) {
