@@ -38,7 +38,9 @@ export async function handleText(message, replyToken, source, timestamp, client,
                 const lat = dbRefTambah.data().latitude;
                 const long = dbRefTambah.data().longitude;
                 const API_JAM = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${lat}&lng=${long}&time=${Math.ceil(timestamp / 1000)}`;
+                console.log(lat, long);
                 let respWaktuSekarang = await axios.get(API_JAM);
+                console.log(respWaktuSekarang);
                 const waktuSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString();
                 tanggalSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD").toString();
                 const waktuSubuh = respWaktuSekarang.data.data.Fajr;
