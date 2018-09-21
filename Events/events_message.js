@@ -43,7 +43,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
                 console.log(lat, long);
                 let respWaktuSekarang = await axios.get(API_JAM);
                 console.log(respWaktuSekarang);
-                API_URL = `https://time.siswadi.com/pray/?lat=${latitude}&lng=${longitude}`;
+                API_URL = `https://time.siswadi.com/pray/?lat=${lat}&lng=${long}`;
                 respJadwalShalat = await axios.get(API_URL);
                 const waktuSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString();
                 tanggalSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD").toString();
