@@ -47,6 +47,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
                 respJadwalShalat = await axios.get(API_URL);
                 const waktuSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("HH:mm").toString();
                 tanggalSekarang = moment(respWaktuSekarang.data.formatted, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD").toString();
+                console.log(respJadwalShalat);
                 const waktuSubuh = respJadwalShalat.data.data.Fajr;
                 const waktuDzuhur = respJadwalShalat.data.data.Dhuhr;
                 const waktuAshar = respJadwalShalat.data.data.Asr;
