@@ -33,9 +33,10 @@ app.get('/api/callme', (req, res) => {
         .create({
             url: `${BASE_URL}/callshalat`,
             to: '+6282239473609',
-            from: 'Shalat Diary'
+            from: '+12408001822'
         })
         .then(call => console.log(call.sid))
+        .then(res.send("Masuk Pak Eko"))
         .done();
 });
 
