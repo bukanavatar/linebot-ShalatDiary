@@ -6,6 +6,7 @@ import {Client, middleware} from '@line/bot-sdk';
 import firebase from './Firebase';
 import schedule from 'node-schedule';
 import axios from 'axios';
+import moment from 'moment';
 //Events
 import {follow} from './Events/events_follow';
 import {handleLocation, handleText} from './Events/events_message';
@@ -26,13 +27,34 @@ const db = firebase.firestore();
 const twiml = new VoiceResponse();
 const BASE_URL = 'https://bukanavatar.com:1234/api';
 
-const j = schedule.scheduleJob({hour: 10, minute: 28}, () => {
-    axios.get(`${BASE_URL}/api/callme`)
-        .then(a => console.log(a))
-        .catch(e => console.log("error", e));
-    console.log("Memanggil");
-});
+async function scheduleTime() {
+    const dbRef = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
+    const latitude = dbRef.data().latitude;
+    const longitude = dbRef.data().longitude;
+    const API_TIME = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}&time=${Math.ceil(timestamp / 1000)}`;
+    const respWaktuSekarang = await axios.get(API_TIME);
+    const timezoneSekarang = respWaktuSekarang.zoneName;
+    const API_TIMEZONE = `http://api.timezonedb.com/v2.1/convert-time-zone?key=S0TR51M7YRLS&format=json&from=${timezoneSekarang}&to=Africa/Ouagadougou&time=${Math.ceil(timestamp / 1000)}`;
+    const respGMT = await axios.get(API_TIMEZONE);
+    const timeStampGMT = respGMT.offset;
 
+    const date = new Date(parseInt(timeStampGMT.replace("-", "")) * 1000).toISOString();
+    const dateObj = moment(date);
+    const HOUR_OFFSET = dateObj.utc().format("HH");
+    const MINUTE_OFFSET = dateObj.utc().format("mm");
+    let kali = 1;
+    if (timeStampGMT.substring(0, 1) === "-") {
+        kali = -1;
+    }
+    const j = schedule.scheduleJob({hour: 6 + (HOUR_OFFSET * kali), minute: 52 + (MINUTE_OFFSET * kali)}, async () => {
+        axios.get(`${BASE_URL}/api/callme`)
+            .then(a => console.log(a))
+            .catch(e => console.log("error", e));
+        console.log("Memanggil");
+    });
+}
+
+scheduleTime();
 app.get('/api/callme', (req, res) => {
     const accountSid = 'AC3a09d93295e6770f86ae5b808aae0de5';
     const authToken = '2e562f97155067193df7e49f02389b06';
