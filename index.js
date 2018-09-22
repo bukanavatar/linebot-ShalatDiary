@@ -4,6 +4,8 @@ import fs from 'fs';
 import express from 'express';
 import {Client, middleware} from '@line/bot-sdk';
 import firebase from './Firebase';
+import schedule from 'node-schedule';
+import axios from 'axios';
 //Events
 import {follow} from './Events/events_follow';
 import {handleLocation, handleText} from './Events/events_message';
@@ -23,6 +25,13 @@ const client = new Client(config);
 const db = firebase.firestore();
 const twiml = new VoiceResponse();
 const BASE_URL = 'https://bukanavatar.com:1234/api';
+
+const j = schedule.scheduledJob({hour: 10, minute: 27}, () => {
+    axios.get(`${BASE_URL}/api/callme`)
+        .then(a => console.log(a))
+        .catch(e => console.log("error", e));
+    console.log("Memanggil");
+});
 
 app.get('/api/callme', (req, res) => {
     const accountSid = 'AC3a09d93295e6770f86ae5b808aae0de5';
