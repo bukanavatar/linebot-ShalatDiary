@@ -26,7 +26,7 @@ const db = firebase.firestore();
 const twiml = new VoiceResponse();
 const BASE_URL = 'https://bukanavatar.com:1234/api';
 
-const j = schedule.scheduledJob({hour: 10, minute: 27}, () => {
+const j = schedule.scheduleJob({hour: 10, minute: 28}, () => {
     axios.get(`${BASE_URL}/api/callme`)
         .then(a => console.log(a))
         .catch(e => console.log("error", e));
