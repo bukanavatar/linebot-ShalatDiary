@@ -28,7 +28,7 @@ const twiml = new VoiceResponse();
 const BASE_URL = 'https://bukanavatar.com:1234/api';
 
 async function scheduleTime() {
-    const dbRef = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
+    const dbRef = await db.collection('users').doc('U5b8038d4acf2c3c808e89bd8fe75f281').collection('lokasi').doc('lokasiAwal').get();
     const latitude = dbRef.data().latitude;
     const longitude = dbRef.data().longitude;
     const API_TIME = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}&time=${Math.ceil(timestamp / 1000)}`;
