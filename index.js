@@ -46,7 +46,7 @@ async function scheduleTime() {
     if (timeStampGMT.substring(0, 1) === "-") {
         kali = -1;
     }
-    const j = schedule.scheduleJob({hour: 6 + (HOUR_OFFSET * kali), minute: 52 + (MINUTE_OFFSET * kali)}, async () => {
+    const j = schedule.scheduleJob({hour: 6 + (HOUR_OFFSET * kali), minute: 55 + (MINUTE_OFFSET * kali)}, async () => {
         axios.get(`${BASE_URL}/api/callme`)
             .then(a => console.log(a))
             .catch(e => console.log("error", e));
