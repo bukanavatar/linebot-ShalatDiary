@@ -31,10 +31,10 @@ async function scheduleTime() {
     const dbRef = await db.collection('users').doc('U5b8038d4acf2c3c808e89bd8fe75f281').collection('lokasi').doc('lokasiAwal').get();
     const latitude = dbRef.data().latitude;
     const longitude = dbRef.data().longitude;
-    const API_TIME = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}&time=${Math.ceil(timestamp / 1000)}`;
+    const API_TIME = `http://api.timezonedb.com/v2.1/get-time-zone?key=S0TR51M7YRLS&format=json&by=position&lat=${latitude}&lng=${longitude}`;
     const respWaktuSekarang = await axios.get(API_TIME);
     const timezoneSekarang = respWaktuSekarang.zoneName;
-    const API_TIMEZONE = `http://api.timezonedb.com/v2.1/convert-time-zone?key=S0TR51M7YRLS&format=json&from=${timezoneSekarang}&to=Africa/Ouagadougou&time=${Math.ceil(timestamp / 1000)}`;
+    const API_TIMEZONE = `http://api.timezonedb.com/v2.1/convert-time-zone?key=S0TR51M7YRLS&format=json&from=${timezoneSekarang}&to=Africa/Ouagadougou`;
     const respGMT = await axios.get(API_TIMEZONE);
     const timeStampGMT = respGMT.offset;
 
@@ -46,7 +46,7 @@ async function scheduleTime() {
     if (timeStampGMT.substring(0, 1) === "-") {
         kali = -1;
     }
-    const j = schedule.scheduleJob({hour: 6 + (HOUR_OFFSET * kali), minute: 55 + (MINUTE_OFFSET * kali)}, async () => {
+    const j = schedule.scheduleJob({hour: 6 + (HOUR_OFFSET * kali), minute: 57 + (MINUTE_OFFSET * kali)}, async () => {
         axios.get(`${BASE_URL}/api/callme`)
             .then(a => console.log(a))
             .catch(e => console.log("error", e));
