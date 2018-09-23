@@ -191,15 +191,19 @@ export async function handleLocation(message, replyToken, source, client, db) {
 
         if (data.fLocationAwal === 1) {
             await refDbLokasiAwal.set(objectGantiLokasi, {merge: true});
+            console.log("1");
             await refDb.set({
                 'fLocationAwal': 0
             }, {merge: true});
+            console.log("2");
             await client.replyMessage(replyToken, template_shareLokasi(message));
         } else if (data.fLocationGanti === 1) {
             await refDbLokasiAwal.set(objectGantiLokasi, {merge: true});
+            console.log("1");
             await refDb.set({
                 'fLocationAwal': 0
             }, {merge: true});
+            console.log("2");
             await client.replyMessage(replyToken, template_updateLokasi(message));
         }
     } catch (e) {
