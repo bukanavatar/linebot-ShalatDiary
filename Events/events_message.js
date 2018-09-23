@@ -187,17 +187,19 @@ export async function handleLocation(message, replyToken, source, client, db) {
             'latitude': message.latitude.toString(),
             'longitude': message.longitude.toString(),
         };
-        const setFlagLocationZero = await refDb.set({
-            'fLocationAwal': 0
-        }, {merge: true});
+
 
         if (data.fLocationAwal === 1) {
             await refDbLokasiAwal.set(objectGantiLokasi, {merge: true});
-            await setFlagLocationZero;
+            await refDb.set({
+                'fLocationAwal': 0
+            }, {merge: true});
             await client.replyMessage(replyToken, template_shareLokasi(message));
         } else if (data.fLocationGanti === 1) {
             await refDbLokasiAwal.set(objectGantiLokasi, {merge: true});
-            await setFlagLocationZero;
+            await refDb.set({
+                'fLocationAwal': 0
+            }, {merge: true});
             await client.replyMessage(replyToken, template_updateLokasi(message));
         }
     } catch (e) {
