@@ -187,7 +187,7 @@ export async function handleLocation(message, replyToken, source, client, db) {
             'latitude': message.latitude.toString(),
             'longitude': message.longitude.toString(),
         };
-        const setFlagLocationZero = refDb.set({
+        const setFlagLocationZero = await refDb.set({
             'fLocationAwal': 0
         }, {merge: true});
 
