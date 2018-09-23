@@ -205,6 +205,8 @@ export async function handleLocation(message, replyToken, source, client, db) {
             }, {merge: true});
             console.log("2");
             await client.replyMessage(replyToken, template_updateLokasi(message));
+        } else {
+            await client.replyMessage(replyToken, template_defaultMessage());
         }
     } catch (e) {
         console.log("Handle Location Error", e);
