@@ -201,7 +201,7 @@ export async function handleLocation(message, replyToken, source, client, db) {
             await refDbLokasiAwal.set(objectGantiLokasi, {merge: true});
             console.log("1");
             await refDb.set({
-                'fLocationAwal': 0
+                'fLocationGanti': 0
             }, {merge: true});
             console.log("2");
             await client.replyMessage(replyToken, template_updateLokasi(message));
