@@ -64,7 +64,7 @@ app.get('/api/callme', (req, res) => {
         .create({
             url: `${BASE_URL}/callshalat`,
             from: '+12408001822',
-            to: '+6282199492326'
+            to: '+6282239473609'
         })
         .then(call => res.send(call.sid))
         .then(res.send("Masuk Pak Eko"))
