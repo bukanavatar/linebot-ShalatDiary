@@ -151,22 +151,13 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         case 'Sendiri':
                             await client.replyMessage(replyToken, [{
                                 type: 'text',
-                                text: 'Bagus, bisa ditingkatkan lagi dengan sering shalat berjamaah di Masjid ya.'
-                            }, {
-                                type: 'text',
-                                text: 'Dari Anas radhiyallahu ‘anhu bahwa Rasulullah shallallahu ‘alaihi wa sallam pada suatu malam mengakhirkan shalat Isya sampai tengah malam. Kemudian beliau menghadap kami setelah shalat, lalu bersabda,'
-                            }, {
-                                type: 'text',
-                                text: 'صَلاَةُ الْجَمَاعَةِ أَفْضَلُ مِنْ صَلاَةِ الْفَذِّ بِسَبْعٍ وَعِشْرِينَ دَرَجَةً'
-                            }, {
-                                type: 'text',
-                                text: '“Shalat jamaah lebih baik 27 derajat dibanding shalat sendirian.” (HR. Bukhari, no. 645 dan Muslim, no. 650)'
+                                text: 'Alhamdulillah \udbc0\udc90, bisa ditingkatkan lagi dengan sering shalat berjamaah di Masjid ya.\nDari Anas radhiyallahu ‘anhu bahwa Rasulullah shallallahu ‘alaihi wa sallam pada suatu malam mengakhirkan shalat Isya sampai tengah malam. Kemudian beliau menghadap kami setelah shalat, lalu bersabda,\nصَلاَةُ الْجَمَاعَةِ أَفْضَلُ مِنْ صَلاَةِ الْفَذِّ بِسَبْعٍ وَعِشْرِينَ دَرَجَةً\n“Shalat jamaah lebih baik 27 derajat dibanding shalat sendirian.” (HR. Bukhari, no. 645 dan Muslim, no. 650)"'
                             }]);
                             break;
                         case 'Tidak Shalat':
                             await client.replyMessage(replyToken, [{
                                 type: 'text',
-                                text: 'Astagfirullah \udbc0\udc85 \n Nabi Shallallahu’alaihi Wasallam bersabda \n مَنْ حَافَظَ عَلَيْهَا كَانَتْ لَهُ نُوْرًا وَبُرْهَانًا وَنَجَاةً يَوْمَ الْقِيَامَةِ. \n “Barangsiapa yang menjaga shalat, dijadikan baginya cahaya, petunjuk dan keselamatan di hari kiamat.”'
+                                text: 'Astagfirullah \udbc0\udc85 \nNabi Shallallahu’alaihi Wasallam bersabda \nمَنْ حَافَظَ عَلَيْهَا كَانَتْ لَهُ نُوْرًا وَبُرْهَانًا وَنَجَاةً يَوْمَ الْقِيَامَةِ. \n“Barangsiapa yang menjaga shalat, dijadikan baginya cahaya, petunjuk dan keselamatan di hari kiamat.”'
                             }, {
                                 type: 'text',
                                 text: 'Mulailah untuk menjaga shalatnya ya \udbc0\udc7f'
