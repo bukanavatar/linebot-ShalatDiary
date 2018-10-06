@@ -128,6 +128,19 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         fTambahShalatKemarin: 0,
                     }, {merge: true});
                     //Send reply message
+                    await client.replyMessage(replyToken, {
+                        type: 'text',
+                        text: 'Berhasil Gan'
+                    });
+
+                } else {
+                    await dbRefTanggal.set({
+                        [shalatSekarang]: objectShalat
+                    }, {merge: true});
+                    await dbRef.set({
+                        'fTambahShalat': 0,
+                        'fTambahShalatKemarin': 0,
+                    }, {merge: true});
                     switch (waktuShalatA) {
                         case 'Jamaah':
                             await client.replyMessage(replyToken, {
@@ -151,18 +164,6 @@ export async function handleText(message, replyToken, source, timestamp, client,
                             });
                             break;
                     }
-                } else {
-                    await dbRefTanggal.set({
-                        [shalatSekarang]: objectShalat
-                    }, {merge: true});
-                    await dbRef.set({
-                        'fTambahShalat': 0,
-                        'fTambahShalatKemarin': 0,
-                    }, {merge: true});
-                    await client.replyMessage(replyToken, {
-                        type: 'text',
-                        text: 'Berhasil Gan'
-                    });
                 }
             }
         } catch (e) {
