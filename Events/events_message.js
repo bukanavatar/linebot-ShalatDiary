@@ -151,7 +151,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         case 'Sendiri':
                             await client.replyMessage(replyToken, [{
                                 type: 'text',
-                                text: 'Alhamdulillah \udbc0\udc90, bisa ditingkatkan lagi dengan sering shalat berjamaah di Masjid ya.\nDari Anas radhiyallahu ‘anhu bahwa Rasulullah shallallahu ‘alaihi wa sallam pada suatu malam mengakhirkan shalat Isya sampai tengah malam. Kemudian beliau menghadap kami setelah shalat, lalu bersabda,\nصَلاَةُ الْجَمَاعَةِ أَفْضَلُ مِنْ صَلاَةِ الْفَذِّ بِسَبْعٍ وَعِشْرِينَ دَرَجَةً\n“Shalat jamaah lebih baik 27 derajat dibanding shalat sendirian.” (HR. Bukhari, no. 645 dan Muslim, no. 650)"'
+                                text: 'Alhamdulillah \udbc0\udc90, bisa ditingkatkan lagi dengan sering shalat berjamaah di Masjid ya.\n\nDari Anas radhiyallahu ‘anhu bahwa Rasulullah shallallahu ‘alaihi wa sallam pada suatu malam mengakhirkan shalat Isya sampai tengah malam. Kemudian beliau menghadap kami setelah shalat, lalu bersabda,\n\nصَلاَةُ الْجَمَاعَةِ أَفْضَلُ مِنْ صَلاَةِ الْفَذِّ بِسَبْعٍ وَعِشْرِينَ دَرَجَةً\n\n“Shalat jamaah lebih baik 27 derajat dibanding shalat sendirian.” (HR. Bukhari, no. 645 dan Muslim, no. 650)"'
                             }]);
                             break;
                         case 'Tidak Shalat':
