@@ -163,6 +163,21 @@ export async function handleText(message, replyToken, source, timestamp, client,
                                 text: '“Shalat jamaah lebih baik 27 derajat dibanding shalat sendirian.” (HR. Bukhari, no. 645 dan Muslim, no. 650)'
                             }]);
                             break;
+                        case 'Tidak Shalat':
+                            await client.replyMessage(replyToken, [{
+                                type: 'text',
+                                text: 'Astagfirullah \udbc0\udc85'
+                            }, {
+                                type: 'text',
+                                text: 'Nabi Shallallahu’alaihi Wasallam bersabda'
+                            }, {
+                                type: 'text',
+                                text: 'مَنْ حَافَظَ عَلَيْهَا كَانَتْ لَهُ نُوْرًا وَبُرْهَانًا وَنَجَاةً يَوْمَ الْقِيَامَةِ.'
+                            }, {
+                                type: 'text',
+                                text: '“Barangsiapa yang menjaga shalat, dijadikan baginya cahaya, petunjuk dan keselamatan di hari kiamat.”'
+                            }]);
+                            break;
                     }
                 }
             }
