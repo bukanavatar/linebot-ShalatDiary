@@ -166,16 +166,10 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         case 'Tidak Shalat':
                             await client.replyMessage(replyToken, [{
                                 type: 'text',
-                                text: 'Astagfirullah \udbc0\udc85'
+                                text: 'Astagfirullah \udbc0\udc85 \n Nabi Shallallahu’alaihi Wasallam bersabda \n مَنْ حَافَظَ عَلَيْهَا كَانَتْ لَهُ نُوْرًا وَبُرْهَانًا وَنَجَاةً يَوْمَ الْقِيَامَةِ. \n “Barangsiapa yang menjaga shalat, dijadikan baginya cahaya, petunjuk dan keselamatan di hari kiamat.”'
                             }, {
                                 type: 'text',
-                                text: 'Nabi Shallallahu’alaihi Wasallam bersabda'
-                            }, {
-                                type: 'text',
-                                text: 'مَنْ حَافَظَ عَلَيْهَا كَانَتْ لَهُ نُوْرًا وَبُرْهَانًا وَنَجَاةً يَوْمَ الْقِيَامَةِ.'
-                            }, {
-                                type: 'text',
-                                text: '“Barangsiapa yang menjaga shalat, dijadikan baginya cahaya, petunjuk dan keselamatan di hari kiamat.”'
+                                text: 'Mulailah untuk menjaga shalatnya ya \udbc0\udc7f'
                             }]);
                             break;
                     }
