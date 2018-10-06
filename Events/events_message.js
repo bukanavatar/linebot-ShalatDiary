@@ -128,10 +128,29 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         fTambahShalatKemarin: 0,
                     }, {merge: true});
                     //Send reply message
-                    await client.replyMessage(replyToken, {
-                        type: 'text',
-                        text: 'Berhasil Gan'
-                    })
+                    switch (waktuShalatA) {
+                        case 'Jamaah':
+                            await client.replyMessage(replyToken, {
+                                type: 'text',
+                                text: 'Berhasil Gan'
+                            });
+                            break;
+                        case 'Sendiri':
+                            await client.replyMessage(replyToken, {
+                                type: 'text',
+                                text: 'Bagus, bisa ditingkatkan lagi dengan sering shalat berjamaah di Masjid ya.\n'
+                            }, {
+                                type: 'text',
+                                text: 'Dari Anas radhiyallahu ‘anhu bahwa Rasulullah shallallahu ‘alaihi wa sallam pada suatu malam mengakhirkan shalat Isya sampai tengah malam. Kemudian beliau menghadap kami setelah shalat, lalu bersabda,'
+                            }, {
+                                type: 'text',
+                                text: 'صَلاَةُ الْجَمَاعَةِ أَفْضَلُ مِنْ صَلاَةِ الْفَذِّ بِسَبْعٍ وَعِشْرِينَ دَرَجَةً'
+                            }, {
+                                type: 'text',
+                                text: '“Shalat jamaah lebih baik 27 derajat dibanding shalat sendirian.” (HR. Bukhari, no. 645 dan Muslim, no. 650)'
+                            });
+                            break;
+                    }
                 } else {
                     await dbRefTanggal.set({
                         [shalatSekarang]: objectShalat
