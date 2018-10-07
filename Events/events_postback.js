@@ -24,6 +24,7 @@ export function handlePostback(replyToken, source, postback, client, db) {
                     });
                     break;
                 case 'customdate':
+                    console.log(postback.params.date);
                     client.replyMessage(replyToken, {
                         type: 'text',
                         text: "berhasil"
