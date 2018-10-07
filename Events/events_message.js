@@ -182,7 +182,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         case 'Telat':
                             await client.replyMessage(replyToken, [{
                                 type: 'text',
-                                text: 'Yang wajib bagi setiap muslim adalah mengerjakan shalat pada waktunya. Sedangkan mengerjakan shalat di awal waktu menunjukkan afdholiyah atau keutamaan.\n Allah Ta’ala berfirman,\n\nإِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا \n\n “Sesungguhnya shalat memiliki waktu yang telah ditetapkan bagi orang beriman.” (QS. An Nisaa’: 103) \n\n Diusahakan untuk bisa shalat di awal waktu ya',
+                                text: 'Yang wajib bagi setiap muslim adalah mengerjakan shalat pada waktunya. Sedangkan mengerjakan shalat di awal waktu menunjukkan afdholiyah atau keutamaan.\nAllah Ta’ala berfirman,\n\nإِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا \n\n“Sesungguhnya shalat memiliki waktu yang telah ditetapkan bagi orang beriman.” (QS. An Nisaa’: 103) \n\nDiusahakan untuk bisa shalat di awal waktu ya',
                                 quickReply: quickReply()
                             }]);
                             break;
