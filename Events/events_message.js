@@ -158,10 +158,39 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         fTambahShalatKemarin: 0,
                     }, {merge: true});
                     //Send reply message
-                    await client.replyMessage(replyToken, {
-                        type: 'text',
-                        text: 'Berhasil Gan'
-                    });
+                    switch (waktuShalatA) {
+                        case 'Jamaah':
+                            await client.replyMessage(replyToken, {
+                                type: 'text',
+                                text: 'Baguss!!!\udbc0\udc2d pertahankan shalat berjamaahnya. Jangan lupa ajak teman-temanmu untuk menunaikan shalat berjamaah',
+                                quickReply: quickReply()
+                            });
+                            break;
+                        case 'Telat':
+                            await client.replyMessage(replyToken, [{
+                                type: 'text',
+                                text: 'Yang wajib bagi setiap muslim adalah mengerjakan shalat pada waktunya \udbc0\udc71. Sedangkan mengerjakan shalat di awal waktu menunjukkan afdholiyah atau keutamaan.\nAllah Ta’ala berfirman,\n\nإِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا \n\n“Sesungguhnya shalat memiliki waktu yang telah ditetapkan bagi orang beriman.” (QS. An Nisaa’: 103) \n\nDiusahakan untuk bisa shalat di awal waktu ya \udbc0\udc30',
+                                quickReply: quickReply()
+                            }]);
+                            break;
+                        case 'Sendiri':
+                            await client.replyMessage(replyToken, [{
+                                type: 'text',
+                                text: 'Alhamdulillah \udbc0\udc90, bisa ditingkatkan lagi dengan sering shalat berjamaah di Masjid ya.\n\nDari Anas radhiyallahu ‘anhu bahwa Rasulullah shallallahu ‘alaihi wa sallam pada suatu malam mengakhirkan shalat Isya sampai tengah malam. Kemudian beliau menghadap kami setelah shalat, lalu bersabda,\n\nصَلاَةُ الْجَمَاعَةِ أَفْضَلُ مِنْ صَلاَةِ الْفَذِّ بِسَبْعٍ وَعِشْرِينَ دَرَجَةً\n\n“Shalat jamaah lebih baik 27 derajat dibanding shalat sendirian.” (HR. Bukhari, no. 645 dan Muslim, no. 650)"',
+                                quickReply: quickReply()
+                            }]);
+                            break;
+                        case 'Tidak Shalat':
+                            await client.replyMessage(replyToken, [{
+                                type: 'text',
+                                text: 'Astagfirullah \udbc0\udc85 \nNabi Shallallahu’alaihi Wasallam bersabda \nمَنْ حَافَظَ عَلَيْهَا كَانَتْ لَهُ نُوْرًا وَبُرْهَانًا وَنَجَاةً يَوْمَ الْقِيَامَةِ. \n“Barangsiapa yang menjaga shalat, dijadikan baginya cahaya, petunjuk dan keselamatan di hari kiamat.”'
+                            }, {
+                                type: 'text',
+                                text: 'Mulailah untuk menjaga shalatnya ya \udbc0\udc7f',
+                                quickReply: quickReply()
+                            }]);
+                            break;
+                    }
 
                 } else {
                     await dbRefTanggal.set({
@@ -182,7 +211,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         case 'Telat':
                             await client.replyMessage(replyToken, [{
                                 type: 'text',
-                                text: 'Yang wajib bagi setiap muslim adalah mengerjakan shalat pada waktunya. Sedangkan mengerjakan shalat di awal waktu menunjukkan afdholiyah atau keutamaan.\nAllah Ta’ala berfirman,\n\nإِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا \n\n“Sesungguhnya shalat memiliki waktu yang telah ditetapkan bagi orang beriman.” (QS. An Nisaa’: 103) \n\nDiusahakan untuk bisa shalat di awal waktu ya',
+                                text: 'Yang wajib bagi setiap muslim adalah mengerjakan shalat pada waktunya \udbc0\udc71. Sedangkan mengerjakan shalat di awal waktu menunjukkan afdholiyah atau keutamaan.\nAllah Ta’ala berfirman,\n\nإِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا \n\n“Sesungguhnya shalat memiliki waktu yang telah ditetapkan bagi orang beriman.” (QS. An Nisaa’: 103) \n\nDiusahakan untuk bisa shalat di awal waktu ya \udbc0\udc30',
                                 quickReply: quickReply()
                             }]);
                             break;

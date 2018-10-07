@@ -22,7 +22,7 @@ export default function () {
             action: {
                 type: "message",
                 label: "Tambah Record Shalat",
-                text: "Statistik Shalat"
+                text: "Tambah Shalat"
             }
         }]
     }

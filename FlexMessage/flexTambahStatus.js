@@ -30,7 +30,7 @@ export default function (waktuShalat) {
                     },
                     {
                         type: 'text',
-                        text: 'Silhakan pilih sesuai status shalat kamu',
+                        text: 'Silhakan pilih sesuai status shalatmu ',
                         wrap: true,
                         color: '#aaaaaa',
                         size: 'xs'
