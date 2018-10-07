@@ -24,7 +24,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
             case 'statistik shalat':
                 await client.replyMessage(replyToken, {
                     "type": "template",
-                    "altText": "This is a buttons template",
+                    "altText": "Pilih Statistik Shalat",
                     "template": {
                         "type": "buttons",
                         "thumbnailImageUrl": "https://firebasestorage.googleapis.com/v0/b/shalatdiary.appspot.com/o/Statistik-Shalat.jpg?alt=media&token=1ef214e2-798d-4acf-960c-54bbea9c6283",
@@ -180,11 +180,11 @@ export async function handleText(message, replyToken, source, timestamp, client,
                             });
                             break;
                         case 'Telat':
-                            await client.replyMessage(replyToken, {
+                            await client.replyMessage(replyToken, [{
                                 type: 'text',
-                                text: 'Baguss!!!\udbc0\udc2d pertahankan shalat berjamaahnya. Jangan lupa ajak teman-temanmu untuk menunaikan shalat berjamaah',
+                                text: 'Yang wajib bagi setiap muslim adalah mengerjakan shalat pada waktunya. Sedangkan mengerjakan shalat di awal waktu menunjukkan afdholiyah atau keutamaan.\n Allah Ta’ala berfirman,\n\nإِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا \n\n “Sesungguhnya shalat memiliki waktu yang telah ditetapkan bagi orang beriman.” (QS. An Nisaa’: 103) \n\n Diusahakan untuk bisa shalat di awal waktu ya',
                                 quickReply: quickReply()
-                            });
+                            }]);
                             break;
                         case 'Sendiri':
                             await client.replyMessage(replyToken, [{

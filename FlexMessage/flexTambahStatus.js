@@ -6,7 +6,7 @@ export default function (waktuShalat) {
             type: 'bubble',
             hero: {
                 type: 'image',
-                url: 'https://images.unsplash.com/photo-1526677504211-233c8477c61b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=be357786c98899479a2fb0a9351a082a&auto=format&fit=crop&w=1050&q=80',
+                url: 'https://firebasestorage.googleapis.com/v0/b/shalatdiary.appspot.com/o/Tambah-Shalat.jpg?alt=media&token=c1893b77-3f82-42b1-89c2-0dbe5d2957d4',
                 size: 'full',
                 aspectRatio: '20:13',
                 aspectMode: 'cover'
