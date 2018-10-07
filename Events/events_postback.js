@@ -39,7 +39,7 @@ export function handlePostback(replyToken, source, postback, client, db) {
                             "actions": [
                                 {
                                     "type": "uri",
-                                    "label": "Iya",
+                                    "label": "Buka",
                                     "uri": liff.toString()
                                 },
                                 {
