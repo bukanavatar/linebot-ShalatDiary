@@ -28,9 +28,9 @@ export async function handleText(message, replyToken, source, timestamp, client,
                             {
                                 "imageUrl": "https://example.com/bot/images/item1.jpg",
                                 "action": {
-                                    "type": "postback",
-                                    "label": "Buy",
-                                    "data": "action=buy&itemid=111"
+                                    "type": "uri",
+                                    "label": "Statistik Harian",
+                                    "linkUri": `line://app/1507502538-jYB1BKYn?user=${idUser}&&date=${moment().format("YYYY-MM-DD")}`
                                 }
                             },
                             {
