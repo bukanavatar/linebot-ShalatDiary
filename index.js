@@ -109,6 +109,8 @@ function handleEvent(event) {
                 case 'location':
                     return handleLocation(message, event.replyToken, event.source, client, db);
             }
+        case 'datetimepicker':
+
     }
 }
 

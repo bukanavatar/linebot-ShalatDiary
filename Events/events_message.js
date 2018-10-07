@@ -48,6 +48,20 @@ export async function handleText(message, replyToken, source, timestamp, client,
                     }
                 });
                 break;
+            case 'datetime':
+                await client.replyMessage(replyToken, {
+                    type: 'template',
+                    altText: 'Datetime pickers alt text',
+                    template: {
+                        type: 'buttons',
+                        text: 'Select date / time !',
+                        actions: [
+                            {type: 'datetimepicker', label: 'date', data: 'DATE', mode: 'date'},
+                            {type: 'datetimepicker', label: 'time', data: 'TIME', mode: 'time'},
+                            {type: 'datetimepicker', label: 'datetime', data: 'DATETIME', mode: 'datetime'},
+                        ],
+                    },
+                });
             case  'jadwal shalat':
                 //1 - Get Lokasi Awal
                 dbRef = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
