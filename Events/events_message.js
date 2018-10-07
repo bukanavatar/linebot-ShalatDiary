@@ -28,9 +28,9 @@ export async function handleText(message, replyToken, source, timestamp, client,
                             {
                                 "imageUrl": "https://example.com/bot/images/item1.jpg",
                                 "action": {
-                                    "type": "message",
-                                    "label": "Yes",
-                                    "text": "Yes"
+                                    "type": "uri",
+                                    "label": "View details",
+                                    "uri": "http://www.google.com"
                                 }
                             },
                             {
