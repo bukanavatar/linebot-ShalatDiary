@@ -23,17 +23,35 @@ export async function handleText(message, replyToken, source, timestamp, client,
             case 'statistik shalat':
                 await client.replyMessage(replyToken, {
                     "type": "template",
-                    "altText": "this is a image carousel template",
+                    "altText": "This is a buttons template",
                     "template": {
-                        "type": "image_carousel",
-                        "columns": [
+                        "type": "buttons",
+                        "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+                        "imageAspectRatio": "rectangle",
+                        "imageSize": "cover",
+                        "imageBackgroundColor": "#FFFFFF",
+                        "title": "Menu",
+                        "text": "Please select",
+                        "defaultAction": {
+                            "type": "uri",
+                            "label": "View detail",
+                            "uri": "http://example.com/page/123"
+                        },
+                        "actions": [
                             {
-                                "imageUrl": "https://example.com/bot/images/item1.jpg",
-                                "action": {
-                                    "type": "uri",
-                                    "label": "Statistik Harian",
-                                    "uri": "https://www.google.com"
-                                }
+                                "type": "postback",
+                                "label": "Buy",
+                                "data": "action=buy&itemid=123"
+                            },
+                            {
+                                "type": "postback",
+                                "label": "Add to cart",
+                                "data": "action=add&itemid=123"
+                            },
+                            {
+                                "type": "uri",
+                                "label": "View detail",
+                                "uri": "http://example.com/page/123"
                             }
                         ]
                     }
