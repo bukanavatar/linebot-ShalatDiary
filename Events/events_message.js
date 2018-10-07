@@ -18,6 +18,12 @@ export async function handleText(message, replyToken, source, timestamp, client,
         profileId = profile.userId;
         let API_URL, respJadwalShalat, bulanSekarang, dbRef, latitude, longitude;
         switch (message.text.toLowerCase()) {
+            case 'statistik shalat':
+                await client.replyMessage(replyToken, {
+                    type: 'uri',
+                    linkUri: `line://app/1507502538-jYB1BKYn?user=${idUser}&&date${moment().format("YYYY-MM-DD")}`
+                });
+                break;
             case  'jadwal shalat':
                 //1 - Get Lokasi Awal
                 dbRef = await db.collection('users').doc(profileId).collection('lokasi').doc('lokasiAwal').get();
@@ -145,7 +151,13 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         case 'Jamaah':
                             await client.replyMessage(replyToken, {
                                 type: 'text',
-                                text: 'Berhasil Gan'
+                                text: 'Baguss!!!\udbc0\udc2d pertahankan shalat berjamaahnya. Jangan lupa ajak teman-temanmu untuk menunaikan shalat berjamaah'
+                            });
+                            break;
+                        case 'Telat':
+                            await client.replyMessage(replyToken, {
+                                type: 'text',
+                                text: 'Baguss!!!\udbc0\udc2d pertahankan shalat berjamaahnya. Jangan lupa ajak teman-temanmu untuk menunaikan shalat berjamaah'
                             });
                             break;
                         case 'Sendiri':
