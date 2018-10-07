@@ -17,7 +17,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
         let profile = await client.getProfile(idUser);
         profileId = profile.userId;
         let API_URL, respJadwalShalat, bulanSekarang, dbRef, latitude, longitude;
-        const liff = `line://app/1507502538-jYB1BKYn?user=${idUser}&&date=${moment().format("YYYY-MM-DD").toString()}`;
+        const liff = `line://app/1507502538-jYB1BKYn`;
         switch (message.text.toLowerCase()) {
             case 'statistik shalat':
                 await client.replyMessage(replyToken, {
