@@ -18,6 +18,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
         profileId = profile.userId;
         let API_URL, respJadwalShalat, bulanSekarang, dbRef, latitude, longitude;
         const liff = `line://app/1507502538-5MDgDEQO?user=${idUser}&&date=${moment().format("YYYY-MM-DD").toString()}`;
+        console.log(liff);
         switch (message.text.toLowerCase()) {
             case 'statistik shalat':
                 await client.replyMessage(replyToken, {
@@ -32,22 +33,6 @@ export async function handleText(message, replyToken, source, timestamp, client,
                                     "type": "uri",
                                     "label": "Statistik Harian",
                                     "uri": "line://app/1507502538-5MDgDEQO"
-                                }
-                            },
-                            {
-                                "imageUrl": "https://example.com/bot/images/item2.jpg",
-                                "action": {
-                                    "type": "message",
-                                    "label": "Yes",
-                                    "text": "yes"
-                                }
-                            },
-                            {
-                                "imageUrl": "https://example.com/bot/images/item3.jpg",
-                                "action": {
-                                    "type": "uri",
-                                    "label": "View detail",
-                                    "uri": "http://example.com/page/222"
                                 }
                             }
                         ]
