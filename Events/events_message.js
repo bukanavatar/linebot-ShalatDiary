@@ -33,22 +33,12 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         "imageBackgroundColor": "#FFFFFF",
                         "title": "Statistik Shalat",
                         "text": "Pilih Statistik yang ingin kamu lihat",
-                        "defaultAction": {
-                            "type": "uri",
-                            "label": "View detail",
-                            "uri": "http://example.com/page/123"
-                        },
                         "actions": [
                             {
                                 "type": "uri",
                                 "label": "Statistik Harian",
                                 "uri": liff.toString()
-                            }, {
-                                type: 'datetimepicker',
-                                label: 'Pilih Tanggal Statistik',
-                                data: 'customdate',
-                                mode: 'date'
-                            }
+                            }, {type: 'datetimepicker', label: 'date', data: 'customdate', mode: 'date'},
                         ]
                     }
                 });
