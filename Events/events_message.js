@@ -45,7 +45,8 @@ export async function handleText(message, replyToken, source, timestamp, client,
                                 mode: 'date'
                             },
                         ]
-                    }
+                    },
+                    quickReply: quickReply()
                 });
                 break;
             case  'jadwal shalat':
