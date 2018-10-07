@@ -32,7 +32,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
                                 "action": {
                                     "type": "uri",
                                     "label": "Statistik Harian",
-                                    "uri": "line://app/1507502538-5MDgDEQO"
+                                    "uri": "https://www.google.com"
                                 }
                             }
                         ]
