@@ -30,7 +30,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
                                 "action": {
                                     "type": "uri",
                                     "label": "Statistik Harian",
-                                    "linkUri": `line://app/1507502538-jYB1BKYn?user=${idUser}&&date=${moment().format("YYYY-MM-DD")}`
+                                    "uri": `line://app/1507502538-jYB1BKYn?user=${idUser}&&date=${moment().format("YYYY-MM-DD")}`
                                 }
                             },
                             {
