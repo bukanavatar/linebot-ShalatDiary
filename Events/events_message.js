@@ -30,8 +30,8 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         "imageAspectRatio": "rectangle",
                         "imageSize": "cover",
                         "imageBackgroundColor": "#FFFFFF",
-                        "title": "Menu",
-                        "text": "Please select",
+                        "title": "Statistik Shalat",
+                        "text": "Pilih Statistik yang ingin kamu lihat",
                         "defaultAction": {
                             "type": "uri",
                             "label": "View detail",
@@ -39,9 +39,9 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         },
                         "actions": [
                             {
-                                "type": "postback",
-                                "label": "Buy",
-                                "data": "action=buy&itemid=123"
+                                "type": "uri",
+                                "label": "Daily Shalat",
+                                "uri": liff.toString()
                             },
                             {
                                 "type": "postback",
