@@ -36,11 +36,11 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         "actions": [
                             {
                                 "type": "uri",
-                                "label": "Statistik Harian",
+                                "label": "Hari Ini",
                                 "uri": liff.toString()
                             }, {
                                 type: 'datetimepicker',
-                                label: 'Pilih Tanggal Sendiri',
+                                label: 'Pilih Tanggal',
                                 data: 'customdate',
                                 mode: 'date'
                             },
