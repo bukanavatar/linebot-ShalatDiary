@@ -43,6 +43,11 @@ export async function handleText(message, replyToken, source, timestamp, client,
                                 "type": "uri",
                                 "label": "Statistik Harian",
                                 "uri": liff.toString()
+                            }, {
+                                type: 'datetimepicker',
+                                label: 'Pilih Tanggal Statistik',
+                                data: 'customdate',
+                                mode: 'date'
                             }
                         ]
                     }
