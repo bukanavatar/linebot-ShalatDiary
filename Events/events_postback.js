@@ -1,5 +1,6 @@
 export function handlePostback(replyToken, source, postback, client, db) {
     const idUser = source.userId;
+    console.log(postback.data);
     return client.getProfile(idUser)
         .then(profile => {
             const profileId = profile.userId;
