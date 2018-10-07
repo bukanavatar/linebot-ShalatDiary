@@ -27,7 +27,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
                     "altText": "This is a buttons template",
                     "template": {
                         "type": "buttons",
-                        "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+                        "thumbnailImageUrl": "https://firebasestorage.googleapis.com/v0/b/shalatdiary.appspot.com/o/Statistik-Shalat.jpg?alt=media&token=1ef214e2-798d-4acf-960c-54bbea9c6283",
                         "imageAspectRatio": "rectangle",
                         "imageSize": "cover",
                         "imageBackgroundColor": "#FFFFFF",
