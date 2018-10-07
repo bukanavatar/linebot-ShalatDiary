@@ -22,6 +22,11 @@ export function handlePostback(replyToken, source, postback, client, db) {
                         }
                     });
                     break;
+                case 'customdate':
+                    client.replyMessage(replyToken, {
+                        type: 'text',
+                        text: postback.params.datetime
+                    })
 
             }
         });

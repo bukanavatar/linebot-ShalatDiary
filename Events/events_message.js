@@ -56,7 +56,7 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         type: 'buttons',
                         text: 'Select date / time !',
                         actions: [
-                            {type: 'datetimepicker', label: 'date', data: 'DATE', mode: 'date'},
+                            {type: 'datetimepicker', label: 'date', data: 'customdate', mode: 'date'},
                             {type: 'datetimepicker', label: 'time', data: 'TIME', mode: 'time'},
                             {type: 'datetimepicker', label: 'datetime', data: 'DATETIME', mode: 'datetime'},
                         ],
