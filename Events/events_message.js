@@ -5,6 +5,7 @@ import template_shareLokasi from "../FlexMessage/template_shareLokasi";
 import template_updateLokasi from "../FlexMessage/template_updateLokasi";
 import flex_jadwalShalat from "../FlexMessage/flex_jadwalShalat";
 import template_defaultMessage from "../FlexMessage/template_defaultMessage";
+import quickReply from "../FlexMessage/quickReply";
 
 let tanggalSekarang = '';
 let shalatSekarang = '';
@@ -40,18 +41,8 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         "actions": [
                             {
                                 "type": "uri",
-                                "label": "Daily Shalat",
+                                "label": "Statistik Harian",
                                 "uri": liff.toString()
-                            },
-                            {
-                                "type": "postback",
-                                "label": "Add to cart",
-                                "data": "action=add&itemid=123"
-                            },
-                            {
-                                "type": "uri",
-                                "label": "View detail",
-                                "uri": "http://example.com/page/123"
                             }
                         ]
                     }
@@ -184,19 +175,22 @@ export async function handleText(message, replyToken, source, timestamp, client,
                         case 'Jamaah':
                             await client.replyMessage(replyToken, {
                                 type: 'text',
-                                text: 'Baguss!!!\udbc0\udc2d pertahankan shalat berjamaahnya. Jangan lupa ajak teman-temanmu untuk menunaikan shalat berjamaah'
+                                text: 'Baguss!!!\udbc0\udc2d pertahankan shalat berjamaahnya. Jangan lupa ajak teman-temanmu untuk menunaikan shalat berjamaah',
+                                quickReply: quickReply()
                             });
                             break;
                         case 'Telat':
                             await client.replyMessage(replyToken, {
                                 type: 'text',
-                                text: 'Baguss!!!\udbc0\udc2d pertahankan shalat berjamaahnya. Jangan lupa ajak teman-temanmu untuk menunaikan shalat berjamaah'
+                                text: 'Baguss!!!\udbc0\udc2d pertahankan shalat berjamaahnya. Jangan lupa ajak teman-temanmu untuk menunaikan shalat berjamaah',
+                                quickReply: quickReply()
                             });
                             break;
                         case 'Sendiri':
                             await client.replyMessage(replyToken, [{
                                 type: 'text',
-                                text: 'Alhamdulillah \udbc0\udc90, bisa ditingkatkan lagi dengan sering shalat berjamaah di Masjid ya.\n\nDari Anas radhiyallahu ‘anhu bahwa Rasulullah shallallahu ‘alaihi wa sallam pada suatu malam mengakhirkan shalat Isya sampai tengah malam. Kemudian beliau menghadap kami setelah shalat, lalu bersabda,\n\nصَلاَةُ الْجَمَاعَةِ أَفْضَلُ مِنْ صَلاَةِ الْفَذِّ بِسَبْعٍ وَعِشْرِينَ دَرَجَةً\n\n“Shalat jamaah lebih baik 27 derajat dibanding shalat sendirian.” (HR. Bukhari, no. 645 dan Muslim, no. 650)"'
+                                text: 'Alhamdulillah \udbc0\udc90, bisa ditingkatkan lagi dengan sering shalat berjamaah di Masjid ya.\n\nDari Anas radhiyallahu ‘anhu bahwa Rasulullah shallallahu ‘alaihi wa sallam pada suatu malam mengakhirkan shalat Isya sampai tengah malam. Kemudian beliau menghadap kami setelah shalat, lalu bersabda,\n\nصَلاَةُ الْجَمَاعَةِ أَفْضَلُ مِنْ صَلاَةِ الْفَذِّ بِسَبْعٍ وَعِشْرِينَ دَرَجَةً\n\n“Shalat jamaah lebih baik 27 derajat dibanding shalat sendirian.” (HR. Bukhari, no. 645 dan Muslim, no. 650)"',
+                                quickReply: quickReply()
                             }]);
                             break;
                         case 'Tidak Shalat':
@@ -205,7 +199,8 @@ export async function handleText(message, replyToken, source, timestamp, client,
                                 text: 'Astagfirullah \udbc0\udc85 \nNabi Shallallahu’alaihi Wasallam bersabda \nمَنْ حَافَظَ عَلَيْهَا كَانَتْ لَهُ نُوْرًا وَبُرْهَانًا وَنَجَاةً يَوْمَ الْقِيَامَةِ. \n“Barangsiapa yang menjaga shalat, dijadikan baginya cahaya, petunjuk dan keselamatan di hari kiamat.”'
                             }, {
                                 type: 'text',
-                                text: 'Mulailah untuk menjaga shalatnya ya \udbc0\udc7f'
+                                text: 'Mulailah untuk menjaga shalatnya ya \udbc0\udc7f',
+                                quickReply: quickReply()
                             }]);
                             break;
                     }

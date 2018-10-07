@@ -1,24 +1,10 @@
+import quickReply from "./quickReply";
+
 export default function (imageMosque, address, res) {
     return {
         type: "flex",
         altText: "Jadwal Shalat hari ini",
-        quickReply: {
-            items: [{
-                type: "action",
-                action: {
-                    type: "message",
-                    label: "Jadwal Shalat",
-                    text: "Jadwal Shalat"
-                }
-            }, {
-                type: "action",
-                action: {
-                    type: "message",
-                    label: "Tambah Record Shalat",
-                    text: "tambah shalat"
-                }
-            }]
-        },
+        quickReply: quickReply(),
         contents: {
             type: "bubble",
             hero: {

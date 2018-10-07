@@ -14,15 +14,15 @@ export default function () {
                 type: "action",
                 action: {
                     type: "message",
-                    label: "Test",
-                    text: "test"
+                    label: "Statistik Shalat",
+                    text: "Statistik Shalat"
                 }
             }, {
                 type: "action",
                 action: {
                     type: "message",
                     label: "Tambah Record Shalat",
-                    text: "tambah shalat"
+                    text: "Statistik Shalat"
                 }
             }]
         }
