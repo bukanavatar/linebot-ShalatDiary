@@ -1,4 +1,5 @@
 import moment from 'moment';
+import quickReply from "../FlexMessage/quickReply";
 
 export function handlePostback(replyToken, source, postback, client, db) {
     const idUser = source.userId;
@@ -30,6 +31,7 @@ export function handlePostback(replyToken, source, postback, client, db) {
                     const liff = `line://app/1507502538-5MDgDEQO?user=${idUser}&&date=${moment(postback.params.date).format("YYYY-MM-DD").toString()}`;
                     client.replyMessage(replyToken, {
                         "type": "template",
+                        quickReply: quickReply(),
                         "altText": `Buka statistik untuk tanggal ${moment(postback.params.date).format("DD MMMM YYYY")}?`,
                         "template": {
                             "type": "confirm",
